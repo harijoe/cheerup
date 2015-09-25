@@ -15,7 +15,9 @@ module.exports = function (shipit) {
                 dirs: [
                     'vendor',
                     'bower_components',
-                    'node_modules'
+                    'node_modules',
+                    'app/cache',
+                    'app/logs'
                 ],
                 files: [
                     'app/config/parameters.yml'

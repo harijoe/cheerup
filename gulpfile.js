@@ -6,14 +6,19 @@ var less = require('gulp-less');
 var concat = require('gulp-concat');
 var sourcemaps = require('gulp-sourcemaps');
 var livereload = require('gulp-livereload');
+var mainBowerFiles = require('main-bower-files');
 var env = process.env.GULP_ENV;
 
 //JAVASCRIPT TASK: write one minified js file out of jquery.js, bootstrap.js and all of my custom js files
 gulp.task('js', function () {
-    return gulp.src(['bower_components/jquery/dist/jquery.js',
-        'bower_components/bootstrap/dist/js/bootstrap.js',
+    var vendorsFiles = mainBowerFiles({filter: /.*\.js$/});
+    var appFiles = [
         'app/Resources/public/js/**/*.js',
-        'src/**/public/js/**/*.js'])
+        'src/**/public/js/**/*.js'
+    ];
+    var files = vendorsFiles.concat(appFiles);
+
+    return gulp.src(files)
         .pipe(concat('javascript.js'))
         .pipe(gulpif(env === 'prod', uglify()))
         .pipe(sourcemaps.write('./'))
@@ -22,10 +27,14 @@ gulp.task('js', function () {
 
 //CSS TASK: write one minified css file out of bootstrap.less and all of my custom less files
 gulp.task('css', function () {
-    return gulp.src([
-        'bower_components/bootstrap/dist/css/bootstrap.css',
+    var vendorsFiles = mainBowerFiles({filter: /.*\.css$|.*\.less$/});
+    var appFiles = [
         'app/Resources/public/less/**/*.less',
-        'src/**/public/js/**/*.less'])
+        'src/**/public/js/**/*.less'
+    ];
+    var files = vendorsFiles.concat(appFiles);
+
+    return gulp.src(files)
         .pipe(gulpif(/[.]less/, less()))
         .pipe(concat('styles.css'))
         .pipe(gulpif(env === 'prod', uglifycss()))
@@ -39,13 +48,18 @@ gulp.task('img', function () {
         .pipe(gulp.dest('web/img'));
 });
 
+gulp.task('fonts', function () {
+    return gulp.src(mainBowerFiles({filter: /.*\.otf$|.*\.eot$|.*\.svg$|.*\.ttf$|.*\.woff$|.*\.woff2$/}))
+        .pipe(sourcemaps.write('./'))
+        .pipe(gulp.dest('web/fonts'));
+});
 
-//TODO
 gulp.task('watch', function () {
     livereload.listen();
     gulp.watch('src/AppBundle/Resources/public/less/*.less', ['less']);
+
     return gulp.watch('src/AppBundle/Resources/public/coffee/*.coffee', ['coffee']);
 });
 
 //define executable tasks when running "gulp" command
-gulp.task('default', ['js', 'css', 'img']);
+gulp.task('default', ['js', 'css', 'fonts', 'img']);
