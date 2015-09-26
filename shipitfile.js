@@ -51,7 +51,7 @@ module.exports = function (shipit) {
     };
 
     var gulpBuild = function () {
-        return shipit.remote("cd " + shipit.releasePath + " && ./node_modules/.bin/gulp");
+        return shipit.remote("cd " + shipit.releasePath + " && ./node_modules/.bin/gulp build");
     };
 
     var fpmRestart = function() {

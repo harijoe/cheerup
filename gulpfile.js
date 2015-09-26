@@ -44,8 +44,8 @@ gulp.task('css', function () {
 
 //IMAGE TASK: Just pipe images from project folder to public web folder
 gulp.task('img', function () {
-    return gulp.src('app/Resources/public/img/**/*.*')
-        .pipe(gulp.dest('web/img'));
+    return gulp.src('app/Resources/public/images/**/*.*')
+        .pipe(gulp.dest('web/images'));
 });
 
 gulp.task('fonts', function () {
@@ -62,4 +62,5 @@ gulp.task('watch', function () {
 });
 
 //define executable tasks when running "gulp" command
-gulp.task('default', ['js', 'css', 'fonts', 'img']);
+gulp.task('default', ['js', 'css', 'fonts', 'img', 'watch']);
+gulp.task('build', ['js', 'css', 'fonts', 'img']);

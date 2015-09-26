@@ -13,7 +13,7 @@
         {% endblock %}
 
     </head>
-    <body role="document">
+    <body role="document" {% block body_attributes %}{% endblock %}>
         {% block body %}{% endblock %}
 
         {% block javascripts %}
