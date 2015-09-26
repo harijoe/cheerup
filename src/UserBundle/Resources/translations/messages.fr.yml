@@ -1,0 +1,7 @@
+login:
+    register:
+        title: Pas encore inscrit ?
+        description: >
+            Bienvenue sur le site de Cheerup. Si tu n'es pas encore inscrit,
+            clique sur le lien suivant et rejoins les autres membres Cheerup.
+        link: Inscris toi !
