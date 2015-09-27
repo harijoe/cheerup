@@ -40,6 +40,13 @@ class User extends BaseUser
     protected $firstName;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     *
+     * @Assert\NotBlank()
+     */
+    protected $lastName;
+
+    /**
      * @return string
      */
     public function getId()
@@ -78,13 +85,6 @@ class User extends BaseUser
     {
         $this->lastName = $lastName;
     }
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     *
-     * @Assert\NotBlank()
-     */
-    protected $lastName;
 
     public function __construct()
     {

@@ -17,7 +17,14 @@ class RegistrationFormType extends AbstractType
             'choice', [
                 'label'   => 'register.field.profile_type',
                 'choices' => User::getProfileTypesChoices()
-            ]);
+            ])
+            ->add('first_name', null, [
+                'label' => 'register.field.first_name'
+            ])
+            ->add('last_name', null, [
+                'label' => 'register.field.last_name'
+            ])
+        ;
     }
 
     public function getParent()
