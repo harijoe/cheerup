@@ -37,8 +37,6 @@ class SecurityControllerTest extends WebTestCase
 
         $crawler = $client->submit($form);
 
-        var_dump($client->getResponse()->getContent());
-
         $this->assertEquals(true, $client->getResponse()->isRedirect('http://'.$baseUrl.'/'));
     }
 }
