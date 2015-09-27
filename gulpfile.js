@@ -49,7 +49,12 @@ gulp.task('img', function () {
 });
 
 gulp.task('fonts', function () {
-    return gulp.src(mainBowerFiles({filter: /.*\.otf$|.*\.eot$|.*\.svg$|.*\.ttf$|.*\.woff$|.*\.woff2$/}))
+    var vendorsFiles = mainBowerFiles({filter: /.*\.otf$|.*\.eot$|.*\.svg$|.*\.ttf$|.*\.woff$|.*\.woff2$/})
+    var extraFiles = [
+        'bower_components/bootstrap/fonts/**'
+    ];
+    var files = vendorsFiles.concat(extraFiles);
+    return gulp.src(files)
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('web/fonts'));
 });

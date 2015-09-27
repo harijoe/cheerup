@@ -65,9 +65,9 @@ module.exports = function (shipit) {
     shipit.blTask('install', function() {
         return composerInstall()
             .then(clearCache)
-            //.then(migrate)
+            .then(migrate)
             .then(npmInstall)
-            .then(bowerInstall)
+            //.then(bowerInstall)
             .then(gulpBuild)
             .then(fpmRestart)
             .then(function () {

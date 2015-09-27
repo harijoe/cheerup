@@ -1,0 +1,14 @@
+{% extends "UserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+<div class="col-md-8 col-md-offset-2">
+    <div class="login-panel panel panel-default text-center">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{ 'register.confirmed.title'|trans }}</h3>
+        </div>
+        <div class="panel-body">
+    <p>{{ 'register.confirmed.message'|trans({'%username%': user.username}) }}</p>
+        </div>
+    </div>
+</div>
+{% endblock fos_user_content %}
