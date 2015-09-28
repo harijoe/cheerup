@@ -12,16 +12,15 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->remove('username')
-            ->add(
-            'profile_type',
+            ->add('profileType',
             'choice', [
                 'label'   => 'register.field.profile_type',
                 'choices' => User::getProfileTypesChoices()
             ])
-            ->add('first_name', null, [
+            ->add('firstName', null, [
                 'label' => 'register.field.first_name'
             ])
-            ->add('last_name', null, [
+            ->add('lastName', null, [
                 'label' => 'register.field.last_name'
             ])
         ;

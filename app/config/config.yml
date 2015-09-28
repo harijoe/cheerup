@@ -64,4 +64,3 @@ fos_user:
     registration:
         form:
             type: app_user_registration
-            validation_groups: [UserRegistration]

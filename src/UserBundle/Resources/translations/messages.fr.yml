@@ -27,10 +27,7 @@ register:
         first_name: Prénom :
         last_name: Nom :
     confirmed:
-        title: Inscription en attente de validation
-        message: >
-            Bonjour %username%, votre compte va maintenant être révisé par un
-            administrateur. Vous serez avertis par email lors de sa validation.
+        title: Inscription confirmée
     back_to_login: Revenir à l'accueil
 
 user:
