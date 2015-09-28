@@ -23,6 +23,3 @@ cache:
       - bower_components
       - vendor
       - bin
-
-notifications:
-    email: false
