@@ -29,7 +29,7 @@ class RegistrationControllerTest extends WebTestCase
 
         $crawler = $client->submit($form);
 
-        $this->assertEquals(true, $client->getResponse()->isRedirect('/register/confirmed'));
+        $this->assertEquals(true, $client->getResponse()->isRedirect('/register/check-email'));
         $this->deleteUserIfHeExists($userManager, $user);
     }
 

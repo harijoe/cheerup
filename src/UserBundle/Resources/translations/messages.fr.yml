@@ -7,7 +7,7 @@ login:
             Bienvenue sur le site de Cheerup. Si tu n'es pas encore inscrit,
             clique sur le lien suivant et rejoins les autres membres Cheerup.
         link: Inscris toi !
-
+    forgot_password: Mot de passe oublié ?
 register:
     title: Inscription
     help:
@@ -38,3 +38,14 @@ user:
         cheerup_friend: Ami de Cheer Up!
         network_volunteer: Volontaire du réseau Cheer Up!
         former_member: Bénévole ou ancien
+
+resetting:
+    check_email:
+        title: Vérification de l'adresse email
+    password_already_requested:
+        title: Mot de passe déjả renvoyé
+    request:
+        title: Demande de réinitialisation de mot de passe
+        email: Email
+    reset:
+        title: Réinitisalisation du mot de passe

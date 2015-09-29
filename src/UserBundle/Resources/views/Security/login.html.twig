@@ -24,6 +24,9 @@
             </div>
             <div class="panel-body">
                 {% include "UserBundle:Security:login_content.html.twig" %}
+                <p>
+                    <a href="{{ path('fos_user_resetting_request') }}">{{ 'login.forgot_password'|trans }}</a>
+                </p>
             </div>
         </div>
     </div>
