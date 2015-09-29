@@ -12,6 +12,8 @@ class SecurityControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/');
         $baseUrl = $client->getKernel()->getContainer()->getParameter('hostname');
 
+        // Base url is needed here. It actually depends on the format of the location attribute retrieved
+        // from the reponses header
         $this->assertEquals(true, $client->getResponse()->isRedirect('http://'.$baseUrl.'/login'));
     }
 
