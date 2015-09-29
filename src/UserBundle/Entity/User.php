@@ -11,10 +11,14 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class User extends BaseUser
 {
-    private static $PROFILE_TYPES = [
-        'CHEERUP_FRIEND'    => 'user.profile_type.cheerup_friend',
-        'NETWORK_VOLUNTEER' => 'user.profile_type.network_volunteer',
-        'FORMER_MEMBER'     => 'user.profile_type.former_member'
+    const CHEERUP_FRIEND    = 'CHEERUP_FRIEND';
+    const NETWORK_VOLUNTEER = 'NETWORK_VOLUNTEER';
+    const FORMER_MEMBER     = 'FORMER_MEMBER';
+
+    private static $profileTypes = [
+        self::CHEERUP_FRIEND    => 'user.profile_type.cheerup_friend',
+        self::NETWORK_VOLUNTEER => 'user.profile_type.network_volunteer',
+        self::FORMER_MEMBER     => 'user.profile_type.former_member'
     ];
 
     /**
@@ -91,6 +95,11 @@ class User extends BaseUser
         parent::__construct();
     }
 
+    public function getFullName()
+    {
+        return $this->getFirstName().' '.$this->getLastName();
+    }
+
     /**
      * @param string $email
      *
@@ -126,7 +135,7 @@ class User extends BaseUser
      */
     public static function getProfileTypes()
     {
-        return array_keys(self::$PROFILE_TYPES);
+        return array_keys(self::$profileTypes);
     }
 
     /**
@@ -134,6 +143,6 @@ class User extends BaseUser
      */
     public static function getProfileTypesChoices()
     {
-        return self::$PROFILE_TYPES;
+        return self::$profileTypes;
     }
 }

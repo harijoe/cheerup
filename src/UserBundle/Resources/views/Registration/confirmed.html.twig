@@ -1,19 +1,24 @@
 {% extends "UserBundle::layout.html.twig" %}
 
 {% block fos_user_content %}
-<div class="col-md-8 col-md-offset-2">
-    <div class="login-panel panel panel-default text-center">
-        <div class="panel-heading">
-            <h3 class="panel-title">{{ 'register.confirmed.title'|trans }}</h3>
-        </div>
-        <div class="panel-body">
-            <p>{{ 'registration.confirmed'|trans({'%username%': user.username}, 'FOSUserBundle') }}</p>
-
-            {% if app.session is not empty %}
-                {% set targetUrl = app.session.get('_security.' ~ app.security.token.providerKey ~ '.target_path') %}
-                {% if targetUrl is not empty %}<p><a href="{{ targetUrl }}">{{ 'registration.back'|trans({}, 'FOSUserBundle') }}</a></p>{% endif %}
-            {% endif %}
+    <div class="col-md-8 col-md-offset-2">
+        <div class="login-panel panel panel-default text-center">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ 'register.confirmed.title'|trans }}</h3>
+            </div>
+            <div class="panel-body">
+                <p>{{ 'registration.confirmed'|trans({'%fullname%': user.fullName}, 'FOSUserBundle') }}</p>
+                <p>
+                    {% if app.session is not empty %}
+                        {% set targetUrl = app.session.get('_security.' ~ app.security.token.providerKey ~ '.target_path') %}
+                        {% if targetUrl is not empty %}<a
+                            href="{{ targetUrl }}">{{ 'registration.back'|trans({}, 'FOSUserBundle') }}</a>
+                        {% endif %}
+                    {% else %}
+                        <a href="{{ path('homepage') }}">{{ 'register.back_to_home'|trans }}</a>
+                    {% endif %}
+                </p>
+            </div>
         </div>
     </div>
-</div>
 {% endblock fos_user_content %}

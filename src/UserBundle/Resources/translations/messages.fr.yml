@@ -28,7 +28,10 @@ register:
         last_name: Nom :
     confirmed:
         title: Inscription confirmée
+    check_email:
+        title: Demande de confirmation
     back_to_login: Revenir à l'accueil
+    back_to_home: Retour à l'accueil
 
 user:
     profile_type:

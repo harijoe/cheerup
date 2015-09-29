@@ -11,6 +11,8 @@ parameters:
     mailer_password:   ~
 
     hostname: localhost
+    fosub_sender_address: no-reply@julienvallini.io
+    fosub_sender_name: No reply
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
