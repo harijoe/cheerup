@@ -11,12 +11,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class User extends BaseUser
 {
-    const CHEERUP_FRIEND    = 'CHEERUP_FRIEND';
     const NETWORK_VOLUNTEER = 'NETWORK_VOLUNTEER';
     const FORMER_MEMBER     = 'FORMER_MEMBER';
 
     private static $profileTypes = [
-        self::CHEERUP_FRIEND    => 'user.profile_type.cheerup_friend',
         self::NETWORK_VOLUNTEER => 'user.profile_type.network_volunteer',
         self::FORMER_MEMBER     => 'user.profile_type.former_member'
     ];
