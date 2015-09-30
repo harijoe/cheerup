@@ -23,7 +23,7 @@ class RegistrationControllerTest extends WebTestCase
         $form['fos_user_registration_form[email]'] = 'usertest@mail.com';
         $form['fos_user_registration_form[plainPassword][first]'] = 'usertestpw';
         $form['fos_user_registration_form[plainPassword][second]'] = 'usertestpw';
-        $form['fos_user_registration_form[profileType]'] = 'CHEERUP_FRIEND';
+        $form['fos_user_registration_form[profileType]'] = 'NETWORK_VOLUNTEER';
         $form['fos_user_registration_form[firstName]'] = 'usertestfn';
         $form['fos_user_registration_form[lastName]'] = 'usertestln';
 
