@@ -1,6 +1,7 @@
 <?php
 namespace UserBundle\Entity;
 
+use AppBundle\Entity\UserProfile;
 use FOS\UserBundle\Entity\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -49,6 +50,14 @@ class User extends BaseUser
     protected $lastName;
 
     /**
+     * @var UserProfile
+     *
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\UserProfile", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="user_profile_id", referencedColumnName="id")
+     */
+    private $userProfile;
+
+    /**
      * @return string
      */
     public function getId()
@@ -91,6 +100,7 @@ class User extends BaseUser
     public function __construct()
     {
         parent::__construct();
+        $this->userProfile = new UserProfile();
     }
 
     public function getFullName()
