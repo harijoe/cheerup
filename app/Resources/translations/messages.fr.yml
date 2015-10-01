@@ -13,5 +13,21 @@ home:
 profile:
     edit:
         title: Mon profil
+        user_profile:
+            title: Informations générales
+            submit: Sauvegarder
+            fields:
+                first_year_contact: Première année de contact avec CheerUp!
+                address: Adresse ligne 1
+                additional_address_details: Adresse ligne 2
+                zip_code: Code postal
+                city: Ville
+                facebook_profile: Adresse du profil Facebook
+                twitter_profile: Adresse du profil Twitter
+                linked_in_profile: Adresse du profil LinkedIn
+                personal_website: Site personnel
+                phone_number: Numéro de téléphone fixe
+                cellphone_number: Numéro de téléphone portable
+            success: Modifications enregistrées !
     view:
         title: Profil de %fullname%

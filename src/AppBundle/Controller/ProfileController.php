@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration as Config;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use UserBundle\Entity\User;
+use AppBundle\Form\Type\UserProfileFormType;
 
 class ProfileController extends Controller
 {
@@ -38,21 +39,26 @@ class ProfileController extends Controller
         $user = $this->getUser();
         $userProfile = $user->getUserProfile();
 
-        //$form = $this->createForm(new UserProfileType, $userProfile);
+        $form = $this->createForm(new UserProfileFormType(), $userProfile);
 
-        //$form->handleRequest($request);
+        $form->handleRequest($request);
 
-        //if ($request->isMethod('POST') && $form->isValid()) {
-        //    $em = $this->getDoctrine()->getManager();
-        //
-        //    $em->persist($userProfile);
-        //    $em->flush();
-        //
-        //    return $this->redirectToRoute('cheerup_profile_edit');
-        //}
+        if ($request->isMethod('POST') && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+
+            $em->persist($userProfile);
+            $em->flush();
+
+            $this->addFlash(
+                'edit_user_profile_success',
+                $this->get('translator')->trans('profile.edit.user_profile.success')
+            );
+
+            return $this->redirectToRoute('cheerup_profile_edit');
+        }
 
         return array(
-            //'form' => $form->createView()
+            'form' => $form->createView()
         );
     }
 }

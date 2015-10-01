@@ -59,16 +59,16 @@ class UserProfile
     /**
      * @var string
      *
-     * @ORM\Column(name="facebookProfileUrl", type="string", length=255, nullable=true)
+     * @ORM\Column(name="facebookProfile", type="string", length=255, nullable=true)
      */
-    private $facebookProfileUrl;
+    private $facebookProfile;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="twitterProfileUrl", type="string", length=255, nullable=true)
+     * @ORM\Column(name="twitterProfile", type="string", length=255, nullable=true)
      */
-    private $twitterProfileUrl;
+    private $twitterProfile;
 
     /**
      * @var string
@@ -199,47 +199,47 @@ class UserProfile
     /**
      * Set facebookProfileUrl
      *
-     * @param string $facebookProfileUrl
+     * @param string $facebookProfile
      * @return UserProfile
      */
-    public function setFacebookProfileUrl($facebookProfileUrl)
+    public function setFacebookProfile($facebookProfile)
     {
-        $this->facebookProfileUrl = $facebookProfileUrl;
+        $this->facebookProfile = $facebookProfile;
 
         return $this;
     }
 
     /**
-     * Get facebookProfileUrl
+     * Get facebookProfile
      *
      * @return string
      */
-    public function getFacebookProfileUrl()
+    public function getFacebookProfile()
     {
-        return $this->facebookProfileUrl;
+        return $this->facebookProfile;
     }
 
     /**
      * Set twitterProfileUrl
      *
-     * @param string $twitterProfileUrl
+     * @param string $twitterProfile
      * @return UserProfile
      */
-    public function setTwitterProfileUrl($twitterProfileUrl)
+    public function setTwitterProfile($twitterProfile)
     {
-        $this->twitterProfileUrl = $twitterProfileUrl;
+        $this->twitterProfile = $twitterProfile;
 
         return $this;
     }
 
     /**
-     * Get twitterProfileUrl
+     * Get twitterProfile
      *
      * @return string
      */
-    public function getTwitterProfileUrl()
+    public function getTwitterProfile()
     {
-        return $this->twitterProfileUrl;
+        return $this->twitterProfile;
     }
 
     /**

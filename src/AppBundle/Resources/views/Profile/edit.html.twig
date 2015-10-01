@@ -6,6 +6,22 @@
             <h1 class="page-header">{{ 'profile.edit.title'|trans }}</h1>
         </div>
         <!-- /.col-lg-12 -->
+        <div class="col-lg-6 text-center">
+            <h2>{{ 'profile.edit.user_profile.title'|trans }}</h2>
+
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+
+            <input class="btn btn-lg btn-default btn-success" type="submit"
+                   value="{{ 'profile.edit.user_profile.submit'|trans }}"/>
+            {{ form_end(form) }}
+
+        </div>
+        <!-- /.col-lg-6 -->
+        <div class="col-lg-6">
+
+        </div>
+        <!-- /.col-lg-6 -->
     </div>
     <!-- /.row -->
 {% endblock %}
