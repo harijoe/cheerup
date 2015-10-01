@@ -6,10 +6,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration as Config;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class DefaultController extends Controller
+class ProfileController extends Controller
 {
     /**
-     * @Config\Route("/", name="homepage")
+     * @Config\Route("/profile", name="cheerup_profile")
      * @Config\Template()
      */
     public function indexAction(Request $request)
