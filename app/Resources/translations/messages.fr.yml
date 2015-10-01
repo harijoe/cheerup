@@ -1,1 +1,14 @@
-base.title.default: Annuaire CheerUp
+base:
+    title:
+        default: Annuaire CheerUp
+homepage:
+    hello: Bonjour %first_name%
+    brand_name: Annuaire CheerUp!
+    navbar:
+        profile: Mon profil
+        group: Groupes
+        search: Rechercher
+        admin: Administration
+
+profile:
+    title: Mon profil
