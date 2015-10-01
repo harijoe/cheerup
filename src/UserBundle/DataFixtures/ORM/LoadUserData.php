@@ -14,16 +14,16 @@ class LoadUserData implements FixtureInterface
     public function load(ObjectManager $manager)
     {
         $user1 = new User();
-        $user1->setFirstName('user1');
-        $user1->setLastName('user1');
+        $user1->setFirstname('user1');
+        $user1->setLastname('user1');
         $user1->setPlainPassword('user1');
         $user1->setEmail('user1@mail.com');
         $user1->setProfileType('FORMER_MEMBER');
         $user1->setEnabled(true);
 
         $user2 = new User();
-        $user2->setFirstName('user2');
-        $user2->setLastName('user2');
+        $user2->setFirstname('user2');
+        $user2->setLastname('user2');
         $user2->setPlainPassword('user2');
         $user2->setEmail('user2@mail.com');
         $user2->setProfileType('NETWORK_VOLUNTEER');

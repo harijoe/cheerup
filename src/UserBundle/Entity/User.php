@@ -40,14 +40,14 @@ class User extends BaseUser
      *
      * @Assert\NotBlank()
      */
-    protected $firstName;
+    protected $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
      *
      * @Assert\NotBlank()
      */
-    protected $lastName;
+    protected $lastname;
 
     /**
      * @var UserProfile
@@ -68,33 +68,33 @@ class User extends BaseUser
     /**
      * @return string
      */
-    public function getFirstName()
+    public function getFirstname()
     {
-        return $this->firstName;
+        return $this->firstname;
     }
 
     /**
-     * @param string $firstName
+     * @param string $firstname
      */
-    public function setFirstName($firstName)
+    public function setFirstname($firstname)
     {
-        $this->firstName = $firstName;
+        $this->firstname = $firstname;
     }
 
     /**
      * @return string
      */
-    public function getLastName()
+    public function getLastname()
     {
-        return $this->lastName;
+        return $this->lastname;
     }
 
     /**
-     * @param string $lastName
+     * @param string $lastname
      */
-    public function setLastName($lastName)
+    public function setLastname($lastname)
     {
-        $this->lastName = $lastName;
+        $this->lastname = $lastname;
     }
 
     public function __construct()
@@ -105,7 +105,7 @@ class User extends BaseUser
 
     public function getFullName()
     {
-        return $this->getFirstName().' '.$this->getLastName();
+        return $this->getFirstname().' '.$this->getLastname();
     }
 
     /**

@@ -9,10 +9,20 @@ use Symfony\Component\HttpFoundation\Request;
 class ProfileController extends Controller
 {
     /**
-     * @Config\Route("/profile", name="cheerup_profile")
+     * @Config\Route("/profile", name="cheerup_profile_view")
      * @Config\Template()
      */
     public function indexAction(Request $request)
+    {
+        // replace this example code with whatever you need
+        return;
+    }
+
+    /**
+     * @Config\Route("/profile", name="cheerup_profile_edit")
+     * @Config\Template()
+     */
+    public function editAction(Request $request)
     {
         // replace this example code with whatever you need
         return;

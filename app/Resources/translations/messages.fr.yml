@@ -2,7 +2,7 @@ base:
     title:
         default: Annuaire CheerUp
 home:
-    hello: Bonjour %first_name%
+    hello: Bonjour %firstname%
     brand_name: Annuaire CheerUp!
     navbar:
         profile: Mon profil
@@ -11,4 +11,7 @@ home:
         admin: Administration
 
 profile:
-    title: Mon profil
+    edit:
+        title: Mon profil
+    view:
+        title: Profil de %fullname%

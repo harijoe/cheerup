@@ -24,8 +24,8 @@ register:
                 extérieures à l'association ayant proposé leur aide à Cheer Up!
     field:
         profile_type: Type de profil :
-        first_name: Prénom :
-        last_name: Nom :
+        firstname: Prénom :
+        lastname: Nom :
     confirmed:
         title: Inscription confirmée
     check_email:
