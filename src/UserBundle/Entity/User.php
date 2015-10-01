@@ -153,4 +153,20 @@ class User extends BaseUser
     {
         return self::$profileTypes;
     }
+
+    /**
+     * @return UserProfile
+     */
+    public function getUserProfile()
+    {
+        return $this->userProfile;
+    }
+
+    /**
+     * @param UserProfile $userProfile
+     */
+    public function setUserProfile($userProfile)
+    {
+        $this->userProfile = $userProfile;
+    }
 }
