@@ -64,6 +64,7 @@ fos_user:
     registration:
         form:
             type: app_user_registration
+            validation_groups: [Default, CheerupRegistration]
         confirmation:
             enabled: true
     from_email:

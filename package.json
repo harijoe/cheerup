@@ -34,7 +34,8 @@
     "gulp-livereload": "^3.8.0"
   },
   "scripts": {
-    "postinstall": "./node_modules/bower/bin/bower install"
+    "postinstall": "./node_modules/bower/bin/bower install",
+    "test": "phpunit -c app/"
   },
   "repository": {
     "type": "git",
