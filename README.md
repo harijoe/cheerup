@@ -13,3 +13,5 @@ You're done, enjoy : http://192.168.33.10
 
 TODO
 ====
+
+ - Add tests for user profile
