@@ -24,7 +24,7 @@ class UserProfile
     /**
      * @var integer
      *
-     * @ORM\Column(name="firstYearContact", type="integer", nullable=true)
+     * @ORM\Column(name="first_year_contact", type="integer", nullable=true)
      */
     private $firstYearContact;
 
@@ -38,14 +38,14 @@ class UserProfile
     /**
      * @var string
      *
-     * @ORM\Column(name="additionalAddressDetails", type="string", length=255, nullable=true)
+     * @ORM\Column(name="additional_address_details", type="string", length=255, nullable=true)
      */
     private $additionalAddressDetails;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="zipCode", type="string", length=20, nullable=true)
+     * @ORM\Column(name="zip_code", type="string", length=20, nullable=true)
      */
     private $zipCode;
 
@@ -59,45 +59,50 @@ class UserProfile
     /**
      * @var string
      *
-     * @ORM\Column(name="facebookProfile", type="string", length=255, nullable=true)
+     * @ORM\Column(name="facebook_profile", type="string", length=255, nullable=true)
      */
     private $facebookProfile;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="twitterProfile", type="string", length=255, nullable=true)
+     * @ORM\Column(name="twitter_profile", type="string", length=255, nullable=true)
      */
     private $twitterProfile;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="linkedInProfile", type="string", length=255, nullable=true)
+     * @ORM\Column(name="linked_in_profile", type="string", length=255, nullable=true)
      */
     private $linkedInProfile;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="personalWebsite", type="string", length=255, nullable=true)
+     * @ORM\Column(name="personal_website", type="string", length=255, nullable=true)
      */
     private $personalWebsite;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="phoneNumber", type="integer", nullable=true)
+     * @ORM\Column(name="phone_number", type="integer", nullable=true)
      */
     private $phoneNumber;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="cellphoneNumber", type="integer", nullable=true)
+     * @ORM\Column(name="cellphone_number", type="integer", nullable=true)
      */
     private $cellphoneNumber;
 
+    /**
+     * @ORM\OneToOne(targetEntity="ProfilePicture")
+     * @ORM\JoinColumn(name="profile_picture_id", referencedColumnName="id", nullable=true)
+     */
+    private $profilePicture;
 
     /**
      * Get id
@@ -332,5 +337,28 @@ class UserProfile
     public function getCellphoneNumber()
     {
         return $this->cellphoneNumber;
+    }
+
+    /**
+     * Set profilePicture
+     *
+     * @param ProfilePicture $profilePicture
+     * @return UserProfile
+     */
+    public function setProfilePicture(ProfilePicture $profilePicture = null)
+    {
+        $this->profilePicture = $profilePicture;
+
+        return $this;
+    }
+
+    /**
+     * Get profilePicture
+     *
+     * @return ProfilePicture
+     */
+    public function getProfilePicture()
+    {
+        return $this->profilePicture;
     }
 }
