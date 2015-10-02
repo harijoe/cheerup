@@ -50,7 +50,7 @@ class ProfileController extends Controller
             $em->flush();
 
             $this->addFlash(
-                'edit_user_profile_success',
+                'success',
                 $this->get('translator')->trans('profile.edit.user_profile.success')
             );
 

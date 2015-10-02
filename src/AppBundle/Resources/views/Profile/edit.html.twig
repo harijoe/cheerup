@@ -5,8 +5,16 @@
         <div class="col-lg-12">
             <h1 class="page-header">{{ 'profile.edit.title'|trans }}</h1>
         </div>
+        <div class="col-lg-12">
+            {% for flashMessage in app.session.flashbag.get('success') %}
+                <div class="alert alert-success alert-dismissable">
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+        </div>
+
         <!-- /.col-lg-12 -->
-        <div class="col-lg-6 text-center">
+        <div class="col-lg-6 text-left">
             <h2>{{ 'profile.edit.user_profile.title'|trans }}</h2>
 
             {{ form_start(form) }}

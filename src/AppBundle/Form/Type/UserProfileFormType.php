@@ -39,9 +39,9 @@ class UserProfileFormType extends AbstractType
     {
         return [
             'attr'     => [
-                'placeholder' => $this::BASE_TRANSLATION_KEY.$translationKey,
+                'placeholder' => $this::BASE_TRANSLATION_KEY.$translationKey.'.placeholder',
             ],
-            'label'    => false,
+            'label'    => $this::BASE_TRANSLATION_KEY.$translationKey.'.label',
             'required' => false
         ];
     }
