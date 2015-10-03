@@ -53,6 +53,7 @@ profile:
             success: Modifications enregistrées avec succès !
         profile_picture:
             title: Photo de profil
+            choose_file: Choisir une photo
             submit: Uploader
             success: Photo mise à jour avec succès !
 

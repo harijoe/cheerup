@@ -70,3 +70,16 @@ fos_user:
     from_email:
         address:        "%fosub_sender_address%"
         sender_name:    "%fosub_sender_name%"
+
+# LiipImagineBundle Configuration
+liip_imagine:
+    resolvers:
+       default:
+          web_path: ~
+
+    filter_sets:
+        cache: ~
+        profile_thumbnail:
+            quality: 75
+            filters:
+                thumbnail: { size: [200, 200], mode: outbound }

@@ -31,7 +31,13 @@ class ProfilePicture
     private $temp;
 
     /**
-     * @Assert\File(maxSize="6M")
+     * @Assert\Image(
+     *     maxSize = "1M",
+     *     minHeight = 200,
+     *     minWidth = 200,
+     *     maxRatio = 1.5,
+     *     minRatio = 0.66
+     * )
      */
     private $file;
 

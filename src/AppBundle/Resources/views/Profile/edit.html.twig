@@ -15,31 +15,49 @@
         </div>
 
         <!-- /.col-lg-12 -->
-        <div class="col-lg-6 text-left">
+        <div class="col-lg-6 text-center">
             <h2>{{ 'profile.edit.user_profile.title'|trans }}</h2>
 
-            {{ form_start(form_user_profile) }}
-            {{ form_widget(form_user_profile) }}
-
-            <input class="btn btn-lg btn-default btn-success" type="submit"
-                   value="{{ 'profile.edit.user_profile.submit'|trans }}"/>
-            {{ form_end(form_user_profile) }}
-
+            <div class="text-left">
+                {{ form_start(form_user_profile) }}
+                {{ form_widget(form_user_profile) }}
+                <div class="text-center">
+                    <input class="btn btn-lg btn-default btn-success" type="submit"
+                           value="{{ 'profile.edit.user_profile.submit'|trans }}"/>
+                </div>
+                {{ form_end(form_user_profile) }}
+            </div>
         </div>
         <!-- /.col-lg-6 -->
-        <div class="col-lg-6">
+        <div class="col-lg-6 text-center">
             <h2>{{ 'profile.edit.profile_picture.title'|trans }}</h2>
 
-            {% if app.user.userProfile.profilePicture is defined %}
-                <img src="{{ app.user.userProfile.profilePicture.webPath}}" />
-            {% endif %}
+            <div class="well well-lg">
+                {% if app.user.userProfile.profilePicture is defined %}
+                    <img src="{{ current_profile_picture_web_path|imagine_filter('profile_thumbnail') }}"
+                         alt="Profile picture thumbnail"
+                         class="img-circle"
+                            />
+                {% endif %}
+            </div>
+            <div class="text-left">
+                {{ form_start(form_profile_picture) }}
+                <div class="form-group text-center">
+                    <div class="has-error">
+                        {{ form_errors(form_profile_picture.file) }}
+                    </div>
+                    <div class="btn-group" role="group" aria-label="...">
+                        <span class="btn btn-lg btn-default btn-default btn-file">
+                            {{ 'profile.edit.profile_picture.choose_file'|trans }}
+                            {{ form_widget(form_profile_picture.file) }}
+                        </span>
+                        <input class="btn btn-lg btn-default btn-success" type="submit"
+                               value="{{ 'profile.edit.profile_picture.submit'|trans }}"/>
+                    </div>
+                </div>
 
-            {{ form_start(form_profile_picture) }}
-            {{ form_widget(form_profile_picture) }}
-
-            <input class="btn btn-lg btn-default btn-success" type="submit"
-                   value="{{ 'profile.edit.profile_picture.submit'|trans }}"/>
-            {{ form_end(form_profile_picture) }}
+                {{ form_end(form_profile_picture) }}
+            </div>
         </div>
         <!-- /.col-lg-6 -->
     </div>

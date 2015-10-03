@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\ProfilePicture;
+use AppBundle\Entity\UserProfile;
 use AppBundle\Form\Type\ProfilePictureFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Config;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -39,8 +40,10 @@ class ProfileController extends Controller
     public function editAction(Request $request)
     {
         $user = $this->getUser();
+        /** @var UserProfile $userProfile */
         $userProfile = $user->getUserProfile();
-        $profilePicture = $userProfile->getProfilePicture();
+        $currentProfilePictureWebPath = $userProfile->getProfilePicture()->getWebPath();
+        $profilePicture = new ProfilePicture();
 
         $formUserProfile = $this->createForm(new UserProfileFormType(), $userProfile);
         $formProfilePicture = $this->createForm(new ProfilePictureFormType(), $profilePicture);
@@ -65,6 +68,8 @@ class ProfileController extends Controller
             if ($formProfilePicture->isValid()) {
                 $em = $this->getDoctrine()->getManager();
 
+                $userProfile->setProfilePicture($profilePicture);
+
                 $em->persist($profilePicture);
                 $em->flush();
 
@@ -78,6 +83,7 @@ class ProfileController extends Controller
         }
 
         return array(
+            'current_profile_picture_web_path' => $currentProfilePictureWebPath,
             'form_user_profile' => $formUserProfile->createView(),
             'form_profile_picture' => $formProfilePicture->createView()
         );

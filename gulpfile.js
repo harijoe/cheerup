@@ -30,7 +30,7 @@ gulp.task('css', function () {
     var vendorsFiles = mainBowerFiles({filter: /.*\.css$|.*\.less$/});
     var appFiles = [
         'app/Resources/public/less/**/*.less',
-        'src/**/public/js/**/*.less'
+        'src/**/public/less/**/*.less'
     ];
     var files = vendorsFiles.concat(appFiles);
 
