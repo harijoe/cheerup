@@ -5,6 +5,8 @@
         <div class="col-lg-12">
             <h1 class="page-header">{{ 'profile.edit.title'|trans }}</h1>
         </div>
+        <!-- /.col-lg-12 -->
+
         <div class="col-lg-12">
             {% for flashMessage in app.session.flashbag.get('success') %}
                 <div class="alert alert-success alert-dismissable">
@@ -13,50 +15,74 @@
                 </div>
             {% endfor %}
         </div>
-
         <!-- /.col-lg-12 -->
-        <div class="col-lg-6 text-center">
-            <h2>{{ 'profile.edit.user_profile.title'|trans }}</h2>
 
-            <div class="text-left">
-                {{ form_start(form_user_profile) }}
-                {{ form_widget(form_user_profile) }}
-                <div class="text-center">
-                    <input class="btn btn-lg btn-default btn-success" type="submit"
-                           value="{{ 'profile.edit.user_profile.submit'|trans }}"/>
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    {{ 'profile.edit.user_profile.title'|trans }}
                 </div>
-                {{ form_end(form_user_profile) }}
+                <div class="panel-body">
+                    {{ form_start(form_user_profile) }}
+                    <h3>{{ 'profile.edit.user_profile.coordinates'|trans }}</h3>
+
+                    <div class="text-left">
+                        {{ form_row(form_user_profile.firstYearContact) }}
+                        {{ form_row(form_user_profile.address) }}
+                        {{ form_row(form_user_profile.additionalAddressDetails) }}
+                        {{ form_row(form_user_profile.zipCode) }}
+                        {{ form_row(form_user_profile.city) }}
+                        {{ form_row(form_user_profile.phoneNumber) }}
+                        {{ form_row(form_user_profile.cellphoneNumber) }}
+                    </div>
+                    <h3>{{ 'profile.edit.user_profile.social_networks'|trans }}</h3>
+
+                    <div class="text-left">
+                        {{ form_row(form_user_profile.facebookProfile) }}
+                        {{ form_row(form_user_profile.twitterProfile) }}
+                        {{ form_row(form_user_profile.linkedInProfile) }}
+                        {{ form_row(form_user_profile.personalWebsite) }}
+                        <div class="text-center">
+                            <input class="btn btn-lg btn-default btn-success btn-block" type="submit"
+                                   value="{{ 'profile.edit.user_profile.submit'|trans }}"/>
+                        </div>
+                    </div>
+                    {{ form_end(form_user_profile) }}
+                </div>
             </div>
         </div>
         <!-- /.col-lg-6 -->
-        <div class="col-lg-6 text-center">
-            <h2>{{ 'profile.edit.profile_picture.title'|trans }}</h2>
 
-            <div class="well well-lg">
-                {% if app.user.userProfile.profilePicture is defined %}
-                    <img src="{{ current_profile_picture_web_path|imagine_filter('profile_thumbnail') }}"
-                         alt="Profile picture thumbnail"
-                         class="img-circle"
-                            />
-                {% endif %}
-            </div>
-            <div class="text-left">
-                {{ form_start(form_profile_picture) }}
-                <div class="form-group text-center">
-                    <div class="has-error">
-                        {{ form_errors(form_profile_picture.file) }}
-                    </div>
-                    <div class="btn-group" role="group" aria-label="...">
-                        <span class="btn btn-lg btn-default btn-default btn-file">
-                            {{ 'profile.edit.profile_picture.choose_file'|trans }}
-                            {{ form_widget(form_profile_picture.file) }}
-                        </span>
-                        <input class="btn btn-lg btn-default btn-success" type="submit"
-                               value="{{ 'profile.edit.profile_picture.submit'|trans }}"/>
-                    </div>
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    {{ 'profile.edit.profile_picture.title'|trans }}
                 </div>
-
-                {{ form_end(form_profile_picture) }}
+                <div class="panel-body text-center">
+                    {% if app.user.userProfile.profilePicture is defined %}
+                        <img src="{{ current_profile_picture_web_path|imagine_filter('profile_thumbnail') }}"
+                             alt="Profile picture thumbnail"
+                             class="img-circle"
+                             style="padding: 15px"
+                                />
+                    {% endif %}
+                    {{ form_start(form_profile_picture) }}
+                    <div class="form-group text-center">
+                        <div class="has-error">
+                            {{ form_errors(form_profile_picture.file) }}
+                        </div>
+                        <div class="btn-group" role="group">
+                            <span class="btn btn-lg btn-default btn-default btn-file">
+                                {{ 'profile.edit.profile_picture.choose_file'|trans }}
+                                {{ form_widget(form_profile_picture.file) }}
+                            </span>
+                            <button type="submit" class="btn btn-lg btn-default btn-success">
+                                <i class="fa fa-cloud-upload fa-lg"></i>
+                            </button>
+                        </div>
+                    </div>
+                    {{ form_end(form_profile_picture) }}
+                </div>
             </div>
         </div>
         <!-- /.col-lg-6 -->
