@@ -8,10 +8,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="cheerup_profile_picture")
+ * @ORM\Table(name="cheerup_picture")
  * @ORM\HasLifecycleCallbacks
  */
-class ProfilePicture
+class Picture
 {
     /**
      * @ORM\Id
@@ -36,7 +36,8 @@ class ProfilePicture
      *     minHeight = 200,
      *     minWidth = 200,
      *     maxRatio = 1.5,
-     *     minRatio = 0.66
+     *     minRatio = 0.66,
+     *     groups={"profile"}
      * )
      */
     private $file;
@@ -88,17 +89,11 @@ class ProfilePicture
             return;
         }
 
-        // check if we have an old image
         if (isset($this->temp)) {
-            // delete the old image
             unlink($this->temp);
-            // clear the temp image path
             $this->temp = null;
         }
 
-        // you must throw an exception here if the file cannot be moved
-        // so that the entity is not persisted to the database
-        // which the UploadedFile move() method does
         $this->getFile()->move(
             $this->getUploadRootDir(),
             $this->id.'.'.$this->getFile()->guessExtension()
@@ -146,6 +141,6 @@ class ProfilePicture
 
     protected function getUploadDir()
     {
-        return 'uploads/profilePictures';
+        return 'uploads/pictures';
     }
 }

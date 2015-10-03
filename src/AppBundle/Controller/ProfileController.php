@@ -2,9 +2,9 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\ProfilePicture;
+use AppBundle\Entity\Picture;
 use AppBundle\Entity\UserProfile;
-use AppBundle\Form\Type\ProfilePictureFormType;
+use AppBundle\Form\Type\PictureFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Config;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -42,14 +42,14 @@ class ProfileController extends Controller
         $user = $this->getUser();
         /** @var UserProfile $userProfile */
         $userProfile = $user->getUserProfile();
-        $currentProfilePictureWebPath = $userProfile->getProfilePicture()->getWebPath();
-        $profilePicture = new ProfilePicture();
+        $currentPictureWebPath = $userProfile->getPicture()->getWebPath();
+        $picture = new Picture();
 
         $formUserProfile = $this->createForm(new UserProfileFormType(), $userProfile);
-        $formProfilePicture = $this->createForm(new ProfilePictureFormType(), $profilePicture);
+        $formPicture = $this->createForm(new PictureFormType(), $picture, array('validation_groups'=>'profile'));
 
         $formUserProfile->handleRequest($request);
-        $formProfilePicture->handleRequest($request);
+        $formPicture->handleRequest($request);
 
         if ($request->isMethod('POST')){
             if ($formUserProfile->isValid()) {
@@ -65,17 +65,17 @@ class ProfileController extends Controller
 
                 return $this->redirectToRoute('cheerup_profile_edit');
             }
-            if ($formProfilePicture->isValid()) {
+            if ($formPicture->isValid()) {
                 $em = $this->getDoctrine()->getManager();
 
-                $userProfile->setProfilePicture($profilePicture);
+                $userProfile->setPicture($picture);
 
-                $em->persist($profilePicture);
+                $em->persist($picture);
                 $em->flush();
 
                 $this->addFlash(
                     'success',
-                    $this->get('translator')->trans('profile.edit.profile_picture.success')
+                    $this->get('translator')->trans('profile.edit.picture.success')
                 );
 
                 return $this->redirectToRoute('cheerup_profile_edit');
@@ -83,9 +83,9 @@ class ProfileController extends Controller
         }
 
         return array(
-            'current_profile_picture_web_path' => $currentProfilePictureWebPath,
+            'current_picture_web_path' => $currentPictureWebPath,
             'form_user_profile' => $formUserProfile->createView(),
-            'form_profile_picture' => $formProfilePicture->createView()
+            'form_picture' => $formPicture->createView()
         );
     }
 }

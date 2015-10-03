@@ -99,14 +99,14 @@ class UserProfile
     private $cellphoneNumber;
 
     /**
-     * @ORM\OneToOne(targetEntity="ProfilePicture",  cascade={"persist", "remove"})
-     * @ORM\JoinColumn(name="profile_picture_id", referencedColumnName="id", nullable=true)
+     * @ORM\OneToOne(targetEntity="Picture",  cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="picture_id", referencedColumnName="id", nullable=true)
      */
-    private $profilePicture;
+    private $picture;
 
     public function __construct()
     {
-        $this->profilePicture = new ProfilePicture();
+        $this->picture = new Picture();
     }
 
     /**
@@ -345,25 +345,26 @@ class UserProfile
     }
 
     /**
-     * Set profilePicture
+     * Set picture
      *
-     * @param ProfilePicture $profilePicture
-     * @return UserProfile
+     * @param Picture $picture
+     *
+*@return UserProfile
      */
-    public function setProfilePicture(ProfilePicture $profilePicture = null)
+    public function setPicture(Picture $picture = null)
     {
-        $this->profilePicture = $profilePicture;
+        $this->picture = $picture;
 
         return $this;
     }
 
     /**
-     * Get profilePicture
+     * Get picture
      *
-     * @return ProfilePicture
+     * @return Picture
      */
-    public function getProfilePicture()
+    public function getPicture()
     {
-        return $this->profilePicture;
+        return $this->picture;
     }
 }

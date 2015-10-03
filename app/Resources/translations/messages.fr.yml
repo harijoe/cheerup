@@ -53,7 +53,7 @@ profile:
                     label: Numéro de téléphone portable
                     placeholder: Exemple : 06 XX XX XX XX
             success: Modifications enregistrées avec succès !
-        profile_picture:
+        picture:
             title: Photo de profil
             choose_file: Choisir une photo
             success: Photo mise à jour avec succès !
