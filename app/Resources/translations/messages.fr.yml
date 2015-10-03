@@ -19,37 +19,42 @@ profile:
             fields:
                 first_year_contact:
                     label: Première année de contact avec CheerUp!
-                    placeholder: Ex : "2004"
+                    placeholder: Exemple : 2004
                 address:
                     label: Adresse ligne 1
-                    placeholder: Ex : 37 rue de Chamboulis
+                    placeholder: Exemple : 37 rue de Chamboulis
                 additional_address_details:
                     label: Adresse ligne 2
-                    placeholder: Ex : Bat A, porte 3
+                    placeholder: Exemple : Bat A, porte 3
                 zip_code:
                     label: Code postal
-                    placeholder: Ex : 75017
+                    placeholder: Exemple : 75017
                 city:
                     label: Ville
-                    placeholder: Ex : Paris
+                    placeholder: Exemple : Paris
                 facebook_profile:
                     label: Adresse du profil Facebook
-                    placeholder: Ex : https://www.facebook.com/prenom.nom
+                    placeholder: Exemple : https://www.facebook.com/prenom.nom
                 twitter_profile:
                     label: Adresse du profil Twitter
-                    placeholder: Ex : https://twitter.com/PrenomNom
+                    placeholder: Exemple : https://twitter.com/PrenomNom
                 linked_in_profile:
                     label: Adresse du profil LinkedIn
-                    placeholder: Ex : https://fr.linkedin.com/in/prenomnom
+                    placeholder: Exemple : https://fr.linkedin.com/in/prenomnom
                 personal_website:
                     label: Site personnel
-                    placeholder: Ex : https://www.monsiteperso.com
+                    placeholder: Exemple : https://www.monsiteperso.com
                 phone_number:
                     label: Numéro de téléphone fixe
-                    placeholder: Ex : 01 XX XX XX XX
+                    placeholder: Exemple : 01 XX XX XX XX
                 cellphone_number:
                     label: Numéro de téléphone portable
-                    placeholder: Ex : 06 XX XX XX XX
+                    placeholder: Exemple : 06 XX XX XX XX
             success: Modifications enregistrées avec succès !
+        profile_picture:
+            title: Photo de profil
+            submit: Uploader
+            success: Photo mise à jour avec succès !
+
     view:
         title: Profil de %fullname%

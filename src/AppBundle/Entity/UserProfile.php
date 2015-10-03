@@ -99,10 +99,15 @@ class UserProfile
     private $cellphoneNumber;
 
     /**
-     * @ORM\OneToOne(targetEntity="ProfilePicture")
+     * @ORM\OneToOne(targetEntity="ProfilePicture",  cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="profile_picture_id", referencedColumnName="id", nullable=true)
      */
     private $profilePicture;
+
+    public function __construct()
+    {
+        $this->profilePicture = new ProfilePicture();
+    }
 
     /**
      * Get id

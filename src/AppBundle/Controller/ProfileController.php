@@ -2,6 +2,8 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\ProfilePicture;
+use AppBundle\Form\Type\ProfilePictureFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Config;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -38,27 +40,46 @@ class ProfileController extends Controller
     {
         $user = $this->getUser();
         $userProfile = $user->getUserProfile();
+        $profilePicture = $userProfile->getProfilePicture();
 
-        $form = $this->createForm(new UserProfileFormType(), $userProfile);
+        $formUserProfile = $this->createForm(new UserProfileFormType(), $userProfile);
+        $formProfilePicture = $this->createForm(new ProfilePictureFormType(), $profilePicture);
 
-        $form->handleRequest($request);
+        $formUserProfile->handleRequest($request);
+        $formProfilePicture->handleRequest($request);
 
-        if ($request->isMethod('POST') && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+        if ($request->isMethod('POST')){
+            if ($formUserProfile->isValid()) {
+                $em = $this->getDoctrine()->getManager();
 
-            $em->persist($userProfile);
-            $em->flush();
+                $em->persist($userProfile);
+                $em->flush();
 
-            $this->addFlash(
-                'success',
-                $this->get('translator')->trans('profile.edit.user_profile.success')
-            );
+                $this->addFlash(
+                    'success',
+                    $this->get('translator')->trans('profile.edit.user_profile.success')
+                );
 
-            return $this->redirectToRoute('cheerup_profile_edit');
+                return $this->redirectToRoute('cheerup_profile_edit');
+            }
+            if ($formProfilePicture->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+
+                $em->persist($profilePicture);
+                $em->flush();
+
+                $this->addFlash(
+                    'success',
+                    $this->get('translator')->trans('profile.edit.profile_picture.success')
+                );
+
+                return $this->redirectToRoute('cheerup_profile_edit');
+            }
         }
 
         return array(
-            'form' => $form->createView()
+            'form_user_profile' => $formUserProfile->createView(),
+            'form_profile_picture' => $formProfilePicture->createView()
         );
     }
 }

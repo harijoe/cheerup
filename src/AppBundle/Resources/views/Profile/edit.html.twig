@@ -9,6 +9,7 @@
             {% for flashMessage in app.session.flashbag.get('success') %}
                 <div class="alert alert-success alert-dismissable">
                     {{ flashMessage }}
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                 </div>
             {% endfor %}
         </div>
@@ -17,17 +18,28 @@
         <div class="col-lg-6 text-left">
             <h2>{{ 'profile.edit.user_profile.title'|trans }}</h2>
 
-            {{ form_start(form) }}
-            {{ form_widget(form) }}
+            {{ form_start(form_user_profile) }}
+            {{ form_widget(form_user_profile) }}
 
             <input class="btn btn-lg btn-default btn-success" type="submit"
                    value="{{ 'profile.edit.user_profile.submit'|trans }}"/>
-            {{ form_end(form) }}
+            {{ form_end(form_user_profile) }}
 
         </div>
         <!-- /.col-lg-6 -->
         <div class="col-lg-6">
+            <h2>{{ 'profile.edit.profile_picture.title'|trans }}</h2>
 
+            {% if app.user.userProfile.profilePicture is defined %}
+                <img src="{{ app.user.userProfile.profilePicture.webPath}}" />
+            {% endif %}
+
+            {{ form_start(form_profile_picture) }}
+            {{ form_widget(form_profile_picture) }}
+
+            <input class="btn btn-lg btn-default btn-success" type="submit"
+                   value="{{ 'profile.edit.profile_picture.submit'|trans }}"/>
+            {{ form_end(form_profile_picture) }}
         </div>
         <!-- /.col-lg-6 -->
     </div>
