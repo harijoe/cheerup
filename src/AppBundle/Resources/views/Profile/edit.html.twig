@@ -17,7 +17,7 @@
         </div>
         <!-- /.col-lg-12 -->
 
-        <div class="col-lg-6">
+        <div class="col-lg-8">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     {{ 'profile.edit.user_profile.title'|trans }}
@@ -51,21 +51,24 @@
                 </div>
             </div>
         </div>
-        <!-- /.col-lg-6 -->
+        <!-- /.col-lg-8 -->
 
-        <div class="col-lg-6">
+        <div class="col-lg-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     {{ 'profile.edit.profile_picture.title'|trans }}
                 </div>
                 <div class="panel-body text-center">
-                    {% if app.user.userProfile.profilePicture is defined %}
-                        <img src="{{ current_profile_picture_web_path|imagine_filter('profile_thumbnail') }}"
-                             alt="Profile picture thumbnail"
-                             class="img-circle"
-                             style="padding: 15px"
-                                />
+                    {% if current_profile_picture_web_path is not null %}
+                        {% set profile_picture_url = current_profile_picture_web_path %}
+                    {% else %}
+                        {% set profile_picture_url = asset('images/default_profile_picture.jpg') %}
                     {% endif %}
+                    <img src="{{ profile_picture_url|imagine_filter('profile_thumbnail') }}"
+                         alt="Profile picture thumbnail"
+                         class="img-circle"
+                         style="padding: 15px"
+                            />
                     {{ form_start(form_profile_picture) }}
                     <div class="form-group text-center">
                         <div class="has-error">
@@ -85,7 +88,7 @@
                 </div>
             </div>
         </div>
-        <!-- /.col-lg-6 -->
+        <!-- /.col-lg-4 -->
     </div>
     <!-- /.row -->
 {% endblock %}

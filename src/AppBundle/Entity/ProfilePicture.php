@@ -23,7 +23,7 @@ class ProfilePicture
     /**
      * @ORM\Column(name="path", type="string", length=255, nullable=true)
      */
-    public $path;
+    private $path;
 
     /**
      * @var string
@@ -32,7 +32,7 @@ class ProfilePicture
 
     /**
      * @Assert\Image(
-     *     maxSize = "1M",
+     *     maxSize = "2M",
      *     minHeight = 200,
      *     minWidth = 200,
      *     maxRatio = 1.5,
