@@ -61,9 +61,7 @@ gulp.task('fonts', function () {
 
 gulp.task('watch', function () {
     livereload.listen();
-    gulp.watch('src/AppBundle/Resources/public/less/*.less', ['less']);
-
-    return gulp.watch('src/AppBundle/Resources/public/coffee/*.coffee', ['coffee']);
+    return gulp.watch('src/AppBundle/Resources/public/less/*.less', ['css']);
 });
 
 //define executable tasks when running "gulp" command
