@@ -8,30 +8,35 @@ use AppBundle\Form\Type\PictureFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Config;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use UserBundle\Entity\User;
 use AppBundle\Form\Type\UserProfileFormType;
 
+/**
+ * Profile controller.
+ *
+ * @Route("/profile")
+ **/
 class ProfileController extends Controller
 {
     /**
-     * @param User    $user
+     * @param User $user
      *
-     * @Config\Route("/profile/{id}", name="cheerup_profile_view")
+     * @Config\Route("/{id}", name="cheerup_profile_view")
      * @Config\Template()
      *
      * @return array
      */
     public function indexAction(User $user)
     {
-        return array(
+        return [
             'fullname' => $user->getFullName()
-        );
+        ];
     }
 
     /**
      * @param Request $request
-
-     * @Config\Route("/profile", name="cheerup_profile_edit")
+     * @Config\Route("/", name="cheerup_profile_edit")
      * @Config\Template()
      * @Config\Security("has_role('ROLE_USER')")
      *
@@ -41,17 +46,17 @@ class ProfileController extends Controller
     {
         $user = $this->getUser();
         /** @var UserProfile $userProfile */
-        $userProfile = $user->getUserProfile();
+        $userProfile           = $user->getUserProfile();
         $currentPictureWebPath = $userProfile->getPicture()->getWebPath();
-        $picture = new Picture();
+        $picture               = new Picture();
 
         $formUserProfile = $this->createForm(new UserProfileFormType(), $userProfile);
-        $formPicture = $this->createForm(new PictureFormType(), $picture, array('validation_groups'=>'profile'));
+        $formPicture     = $this->createForm(new PictureFormType(), $picture, ['validation_groups' => 'profile']);
 
         $formUserProfile->handleRequest($request);
         $formPicture->handleRequest($request);
 
-        if ($request->isMethod('POST')){
+        if ($request->isMethod('POST')) {
             if ($formUserProfile->isValid()) {
                 $em = $this->getDoctrine()->getManager();
 
@@ -82,10 +87,10 @@ class ProfileController extends Controller
             }
         }
 
-        return array(
+        return [
             'current_picture_web_path' => $currentPictureWebPath,
-            'form_user_profile' => $formUserProfile->createView(),
-            'form_picture' => $formPicture->createView()
-        );
+            'form_user_profile'        => $formUserProfile->createView(),
+            'form_picture'             => $formPicture->createView()
+        ];
     }
 }
