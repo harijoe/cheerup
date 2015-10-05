@@ -99,6 +99,8 @@ class UserProfile
     private $cellphoneNumber;
 
     /**
+     * @var Picture
+     *
      * @ORM\OneToOne(targetEntity="Picture",  cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="picture_id", referencedColumnName="id", nullable=true)
      */

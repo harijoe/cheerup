@@ -58,5 +58,9 @@ profile:
             choose_file: Choisir une photo
             success: Photo mise à jour avec succès !
 
+        offshoot_of_origin:
+            title: Antenne d'origine
+            link: Voir la page de l'antenne
+
     view:
         title: Profil de %fullname%

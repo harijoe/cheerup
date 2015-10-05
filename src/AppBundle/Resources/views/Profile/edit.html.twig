@@ -54,6 +54,20 @@
         <!-- /.col-lg-8 -->
 
         <div class="col-lg-4">
+
+            {% if offshoot_of_origin is not null %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    {{ 'profile.edit.offshoot_of_origin.title'|trans }}
+                </div>
+                <div class="panel-body text-center">
+                    <a href="{{ path('cheerup_aggregate_show', {'id': offshoot_of_origin.id}) }}">
+                        {{ 'profile.edit.offshoot_of_origin.link'|trans }}
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+
             <div class="panel panel-default">
                 <div class="panel-heading">
                     {{ 'profile.edit.picture.title'|trans }}

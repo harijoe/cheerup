@@ -1,6 +1,7 @@
 <?php
 namespace UserBundle\Entity;
 
+use AppBundle\Entity\Aggregate;
 use AppBundle\Entity\UserProfile;
 use FOS\UserBundle\Entity\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
@@ -56,6 +57,14 @@ class User extends BaseUser
      * @ORM\JoinColumn(name="user_profile_id", referencedColumnName="id")
      */
     private $userProfile;
+
+    /**
+     * @var Aggregate
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Aggregate", inversedBy="members")
+     * @ORM\JoinColumn(name="aggregate_id", referencedColumnName="id", nullable=true)
+     */
+    private $offshootOfOrigin;
 
     /**
      * @return string
@@ -168,5 +177,21 @@ class User extends BaseUser
     public function setUserProfile($userProfile)
     {
         $this->userProfile = $userProfile;
+    }
+
+    /**
+     * @return Aggregate
+     */
+    public function getOffshootOfOrigin()
+    {
+        return $this->offshootOfOrigin;
+    }
+
+    /**
+     * @param Aggregate $offshootOfOrigin
+     */
+    public function setOffshootOfOrigin($offshootOfOrigin)
+    {
+        $this->offshootOfOrigin = $offshootOfOrigin;
     }
 }

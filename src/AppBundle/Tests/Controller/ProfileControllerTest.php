@@ -2,8 +2,6 @@
 
 namespace AppBundle\Tests\Controller;
 
-use FOS\UserBundle\Model\UserInterface;
-use FOS\UserBundle\Model\UserManager;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class ProfileControllerTest extends WebTestCase
@@ -16,7 +14,7 @@ class ProfileControllerTest extends WebTestCase
 
         $this->assertEquals(true, $client->getResponse()->isRedirect('http://'.$baseUrl.'/profile/'));
         $client->followRedirect();
-        
+
         $this->assertEquals(true, $client->getResponse()->isSuccessful());
     }
 }

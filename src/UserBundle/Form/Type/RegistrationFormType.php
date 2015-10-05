@@ -2,6 +2,8 @@
 
 namespace UserBundle\Form\Type;
 
+use AppBundle\Entity\Aggregate;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use UserBundle\Entity\User;
@@ -17,6 +19,14 @@ class RegistrationFormType extends AbstractType
                 'label'   => 'register.field.profile_type',
                 'choices' => User::getProfileTypesChoices()
             ])
+            ->add('offshootOfOrigin', 'entity', array(
+                'class' => 'AppBundle\Entity\Aggregate',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('a')
+                        ->where('a.aggregateType = \''.Aggregate::OFFSHOOT.'\'');
+                },
+                'choice_label' => 'name',
+            ))
             ->add('firstname', null, [
                 'label' => 'register.field.firstname'
             ])

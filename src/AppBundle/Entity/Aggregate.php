@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use UserBundle\Entity\User;
 
 /**
  * Aggregate
@@ -57,6 +58,11 @@ class Aggregate
      * @Assert\Choice(callback = "getAggregateTypes")
      */
     private $aggregateType;
+
+    /**
+     * @ORM\OneToMany(targetEntity="UserBundle\Entity\User", mappedBy="offshootOfOrigin")
+     */
+    private $members;
 
     /**
      * Get id
@@ -163,4 +169,22 @@ class Aggregate
     {
         return self::$aggregateTypes;
     }
+
+    /**
+     * @return User
+     */
+    public function getMembers()
+    {
+        return $this->members;
+    }
+
+    /**
+     * @param User $members
+     */
+    public function setMembers($members)
+    {
+        $this->members = $members;
+    }
+
+
 }

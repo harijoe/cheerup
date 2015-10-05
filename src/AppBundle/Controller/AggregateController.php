@@ -102,7 +102,7 @@ class AggregateController extends Controller
     /**
      * Finds and displays a Aggregate entity.
      *
-     * @Route("/{id}", name="aggregate_show")
+     * @Route("/{id}", name="cheerup_aggregate_show")
      * @Method("GET")
      * @Template()
      */
