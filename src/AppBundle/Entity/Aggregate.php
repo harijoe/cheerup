@@ -157,7 +157,7 @@ class Aggregate
     /**
      * @return array
      */
-    public static function getProfileTypes()
+    public static function getAggregateTypes()
     {
         return array_keys(self::$aggregateTypes);
     }
@@ -165,7 +165,7 @@ class Aggregate
     /**
      * @return array
      */
-    public static function getProfileTypesChoices()
+    public static function getAggregateTypesChoices()
     {
         return self::$aggregateTypes;
     }

@@ -110,16 +110,16 @@ class AggregateController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppBundle:Aggregate')->find($id);
+        $aggregate = $em->getRepository('AppBundle:Aggregate')->find($id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Aggregate entity.');
+        if (!$aggregate) {
+            throw $this->createNotFoundException('Unable to find Aggregate aggregate.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
+            'aggregate'      => $aggregate,
             'delete_form' => $deleteForm->createView(),
         );
     }

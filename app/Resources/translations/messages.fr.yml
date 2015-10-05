@@ -61,6 +61,11 @@ profile:
         offshoot_of_origin:
             title: Antenne d'origine
             link: Voir la page de l'antenne
-
     view:
         title: Profil de %fullname%
+
+aggregate:
+    header:
+        helper:
+            OFFSHOOT: Antenne
+            GROUP: Groupe
