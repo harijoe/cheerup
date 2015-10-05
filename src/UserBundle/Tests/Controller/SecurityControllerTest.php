@@ -28,17 +28,24 @@ class SecurityControllerTest extends WebTestCase
 
     public function testLoginSubmit()
     {
+        $client = $this->getLoggedInClient('user1@mail.com', 'user1');
+        $baseUrl = $client->getKernel()->getContainer()->getParameter('hostname');
+
+        $this->assertEquals(true, $client->getResponse()->isRedirect('http://'.$baseUrl.'/'));
+    }
+
+    public static function getLoggedInClient($username, $password)
+    {
         $client = static::createClient();
         $crawler = $client->request('GET', '/login');
-        $baseUrl = $client->getKernel()->getContainer()->getParameter('hostname');
 
         $form = $crawler->selectButton('_submit')->form();
 
-        $form['_username'] = 'user1@mail.com';
-        $form['_password'] = 'user1';
+        $form['_username'] = $username;
+        $form['_password'] = $password;
 
-        $crawler = $client->submit($form);
+        $client->submit($form);
 
-        $this->assertEquals(true, $client->getResponse()->isRedirect('http://'.$baseUrl.'/'));
+        return $client;
     }
 }
