@@ -32,7 +32,7 @@ class LoadUserData implements FixtureInterface
         $user2->setLastname('Pagnol');
         $user2->setPlainPassword('user2');
         $user2->setEmail('user2@mail.com');
-        $user2->setProfileType('NETWORK_VOLUNTEER');
+        $user2->setProfileType('FORMER_MEMBER');
         $user2->setEnabled(true);
         $user2->setOffshootOfOrigin($aggregate);
 

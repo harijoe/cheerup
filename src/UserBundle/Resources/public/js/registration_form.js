@@ -10,11 +10,11 @@ $( document ).ready(function() {
 
     function showOrHideOffshootFormGroup() {
         if ($userTypeSelect.val() === FORMER_MEMBER) {
-            $offshootSelectFormGroup.hide();
-            $offshootSelect.attr('disabled', 'disabled');
-        } else {
             $offshootSelectFormGroup.show();
             $offshootSelect.removeAttr('disabled');
+        } else {
+            $offshootSelectFormGroup.hide();
+            $offshootSelect.attr('disabled', 'disabled');
         }
     }
 
