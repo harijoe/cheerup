@@ -4,7 +4,6 @@ module.exports = function (shipit) {
 
     shipit.initConfig({
         default: {
-            deployTo: '/var/www/cheerup',
             workspace: '/tmp/cheerup',
             repositoryUrl: 'git@github.com:harijoe/cheerup.git',
             ignores: ['.git', 'node_modules'],
@@ -26,7 +25,13 @@ module.exports = function (shipit) {
         },
         staging: {
             servers: 'ubuntu@52.28.228.154',
-            branch: 'staging'
+            branch: 'staging',
+            deployTo: '/var/www/cheerup-staging'
+        },
+        prod: {
+            servers: 'ubuntu@52.28.228.154',
+            branch: 'master',
+            deployTo: '/var/www/cheerup'
         }
     });
 

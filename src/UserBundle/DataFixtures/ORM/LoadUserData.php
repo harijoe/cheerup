@@ -2,6 +2,7 @@
 
 namespace UserBundle\DataFixtures\ORM;
 
+use AppBundle\Entity\Aggregate;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use UserBundle\Entity\User;
@@ -21,6 +22,11 @@ class LoadUserData implements FixtureInterface
         $user1->setProfileType('FORMER_MEMBER');
         $user1->setEnabled(true);
 
+        $aggregate = new Aggregate();
+        $aggregate->setAggregateType(Aggregate::OFFSHOOT);
+        $aggregate->setName('Antenne cheerup');
+        $aggregate->setDescription('Voici la description d\'une antenne cheerup');
+
         $user2 = new User();
         $user2->setFirstname('Marcel');
         $user2->setLastname('Pagnol');
@@ -28,7 +34,9 @@ class LoadUserData implements FixtureInterface
         $user2->setEmail('user2@mail.com');
         $user2->setProfileType('NETWORK_VOLUNTEER');
         $user2->setEnabled(true);
+        $user2->setOffshootOfOrigin($aggregate);
 
+        $manager->persist($aggregate);
         $manager->persist($user1);
         $manager->persist($user2);
         $manager->flush();
