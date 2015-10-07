@@ -67,6 +67,15 @@ class User extends BaseUser
     private $offshootOfOrigin;
 
     /**
+     * @ORM\ManyToMany(targetEntity="UserBundle\Entity\Group")
+     * @ORM\JoinTable(name="cheerup_user_user_group",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")}
+     * )
+     */
+    protected $groups;
+
+    /**
      * @return string
      */
     public function getId()
