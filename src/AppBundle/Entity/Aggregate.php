@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use UserBundle\Entity\User;
 
@@ -10,6 +11,7 @@ use UserBundle\Entity\User;
  * Aggregate
  *
  * @ORM\Entity
+ * @UniqueEntity("name")
  * @ORM\Table(name="cheerup_aggregate")
  */
 class Aggregate
@@ -18,8 +20,8 @@ class Aggregate
     const OFFSHOOT = 'OFFSHOOT';
 
     private static $aggregateTypes = [
-        self::GROUP    => 'user.aggregate_type.group',
-        self::OFFSHOOT => 'user.aggregate_type.offshoot'
+        self::GROUP    => 'aggregate.type.group',
+        self::OFFSHOOT => 'aggregate.type.offshoot'
     ];
 
     /**
@@ -34,7 +36,7 @@ class Aggregate
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255, unique=true)
      */
     private $name;
 

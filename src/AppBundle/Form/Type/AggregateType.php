@@ -1,7 +1,8 @@
 <?php
 
-namespace AppBundle\Form;
+namespace AppBundle\Form\Type;
 
+use AppBundle\Entity\Aggregate;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -15,13 +16,20 @@ class AggregateType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('description')
-            ->add('aggregateType')
-            ->add('picture')
+            ->add('name', null, [
+                'label'   => 'admin.index.aggregate.create.field.name'
+            ])
+            ->add('description', null, [
+                'label'   => 'admin.index.aggregate.create.field.description'
+            ])
+            ->add('aggregateType',
+                'choice', [
+                    'label'   => 'admin.index.aggregate.create.field.aggregateType',
+                    'choices' => Aggregate::getAggregateTypesChoices()
+                ])
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

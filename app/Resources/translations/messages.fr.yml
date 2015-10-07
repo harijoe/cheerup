@@ -9,6 +9,16 @@ home:
         group: Groupes
         search: Rechercher
         admin: Administration
+user:
+    profile_type:
+        cheerup_friend: Ami de Cheer Up!
+        network_volunteer: Volontaire du réseau Cheer Up!
+        former_member: Bénévole ou ancien
+
+aggregate:
+    type:
+        group: Groupe
+        offshoot: Antenne
 
 profile:
     edit:
@@ -69,3 +79,16 @@ aggregate:
         helper:
             OFFSHOOT: Antenne
             GROUP: Groupe
+
+admin:
+    index:
+        title: Administration
+        aggregate:
+            create:
+                title: Ajout d'un agrégat
+                success: Agrégat crée avec succès
+                submit: Ajouter
+                field:
+                    name: Nom
+                    description: Description
+                    aggregateType: Type d'agrégat

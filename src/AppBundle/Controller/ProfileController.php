@@ -56,35 +56,33 @@ class ProfileController extends Controller
         $formUserProfile->handleRequest($request);
         $formPicture->handleRequest($request);
 
-        if ($request->isMethod('POST')) {
-            if ($formUserProfile->isValid()) {
-                $em = $this->getDoctrine()->getManager();
+        if ($formUserProfile->isValid()) {
+            $em = $this->getDoctrine()->getManager();
 
-                $em->persist($userProfile);
-                $em->flush();
+            $em->persist($userProfile);
+            $em->flush();
 
-                $this->addFlash(
-                    'success',
-                    $this->get('translator')->trans('profile.edit.user_profile.success')
-                );
+            $this->addFlash(
+                'success',
+                $this->get('translator')->trans('profile.edit.user_profile.success')
+            );
 
-                return $this->redirectToRoute('cheerup_profile_edit');
-            }
-            if ($formPicture->isValid()) {
-                $em = $this->getDoctrine()->getManager();
+            return $this->redirectToRoute('cheerup_profile_edit');
+        }
+        if ($formPicture->isValid()) {
+            $em = $this->getDoctrine()->getManager();
 
-                $userProfile->setPicture($picture);
+            $userProfile->setPicture($picture);
 
-                $em->persist($picture);
-                $em->flush();
+            $em->persist($picture);
+            $em->flush();
 
-                $this->addFlash(
-                    'success',
-                    $this->get('translator')->trans('profile.edit.picture.success')
-                );
+            $this->addFlash(
+                'success',
+                $this->get('translator')->trans('profile.edit.picture.success')
+            );
 
-                return $this->redirectToRoute('cheerup_profile_edit');
-            }
+            return $this->redirectToRoute('cheerup_profile_edit');
         }
 
         return [

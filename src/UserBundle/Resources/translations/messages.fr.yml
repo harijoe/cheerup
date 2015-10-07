@@ -33,12 +33,6 @@ register:
     back_to_login: Revenir à l'accueil
     back_to_home: Retour à l'accueil
 
-user:
-    profile_type:
-        cheerup_friend: Ami de Cheer Up!
-        network_volunteer: Volontaire du réseau Cheer Up!
-        former_member: Bénévole ou ancien
-
 resetting:
     check_email:
         title: Vérification de l'adresse email

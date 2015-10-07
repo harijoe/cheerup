@@ -1,0 +1,42 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">{{ 'admin.index.title'|trans }}</h1>
+        </div>
+        <!-- /.col-lg-12 -->
+
+        <div class="col-lg-12">
+            {% for flashMessage in app.session.flashbag.get('success') %}
+                <div class="alert alert-success alert-dismissable">
+                    {{ flashMessage }}
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                </div>
+            {% endfor %}
+        </div>
+        <!-- /.col-lg-12 -->
+
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    {{ 'admin.index.aggregate.create.title'|trans }}
+                </div>
+                <div class="panel-body">
+                    {{ form_start(form) }}
+                    {{ form_row(form.name) }}
+                    {{ form_row(form.description) }}
+                    {{ form_row(form.aggregateType) }}
+                    <input class="btn btn-lg btn-default btn-success btn-block" type="submit"
+                           value="{{ 'admin.index.aggregate.create.submit'|trans }}"/>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+        <!-- /.col-lg-6 -->
+        <div class="col-lg-6">
+        </div>
+        <!-- /.col-lg-6 -->
+    </div>
+    <!-- /.row -->
+{% endblock %}
