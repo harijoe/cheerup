@@ -3,11 +3,13 @@
 namespace UserBundle\DataFixtures\ORM;
 
 use AppBundle\Entity\Aggregate;
+use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use UserBundle\Entity\User;
 
-class LoadUserData implements FixtureInterface
+class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
 {
     /**
      * {@inheritDoc}
@@ -22,10 +24,7 @@ class LoadUserData implements FixtureInterface
         $user1->setProfileType('FORMER_MEMBER');
         $user1->setEnabled(true);
 
-        $aggregate = new Aggregate();
-        $aggregate->setAggregateType(Aggregate::OFFSHOOT);
-        $aggregate->setName('Antenne cheerup');
-        $aggregate->setDescription('Voici la description d\'une antenne cheerup');
+        $aggregate = $this->getReference('offshoot');
 
         $user2 = new User();
         $user2->setFirstname('Marcel');
@@ -36,9 +35,16 @@ class LoadUserData implements FixtureInterface
         $user2->setEnabled(true);
         $user2->setOffshootOfOrigin($aggregate);
 
-        $manager->persist($aggregate);
         $manager->persist($user1);
         $manager->persist($user2);
         $manager->flush();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getOrder()
+    {
+        return 2;
     }
 }

@@ -3,11 +3,13 @@
 namespace UserBundle\DataFixtures\ORM;
 
 use AppBundle\Entity\Aggregate;
+use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use UserBundle\Entity\User;
 
-class LoadAggregateData implements FixtureInterface
+class LoadAggregateData extends AbstractFixture implements OrderedFixtureInterface
 {
     /**
      * {@inheritDoc}
@@ -24,6 +26,8 @@ class LoadAggregateData implements FixtureInterface
         $aggregate2->setName('Deuxième Antenne');
         $aggregate2->setDescription('Voici la description de l\'antenne 2');
 
+        $this->addReference('offshoot', $aggregate2);
+
         $aggregate3 = new Aggregate();
         $aggregate3->setAggregateType(Aggregate::GROUP);
         $aggregate3->setName('Premier Groupe');
@@ -33,5 +37,13 @@ class LoadAggregateData implements FixtureInterface
         $manager->persist($aggregate2);
         $manager->persist($aggregate3);
         $manager->flush();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getOrder()
+    {
+        return 1;
     }
 }
