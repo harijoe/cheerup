@@ -20,15 +20,15 @@
         <div class="col-lg-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    {{ 'admin.index.aggregate.create.title'|trans }}
+                    {{ 'admin.index.group.create.title'|trans }}
                 </div>
                 <div class="panel-body">
                     {{ form_start(form) }}
                     {{ form_row(form.name) }}
                     {{ form_row(form.description) }}
-                    {{ form_row(form.aggregateType) }}
+                    {{ form_row(form.offshoot) }}
                     <input class="btn btn-lg btn-default btn-success btn-block" type="submit"
-                           value="{{ 'admin.index.aggregate.create.submit'|trans }}"/>
+                           value="{{ 'admin.index.group.create.submit'|trans }}"/>
                     {{ form_end(form) }}
                 </div>
             </div>

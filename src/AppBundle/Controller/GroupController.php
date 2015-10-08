@@ -7,21 +7,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use AppBundle\Entity\Aggregate;
-use AppBundle\Form\AggregateType;
+use AppBundle\Entity\Group;
+use AppBundle\Form\GroupType;
 
 /**
- * Aggregate controller.
+ * Group controller.
  *
- * @Route("/aggregate")
+ * @Route("/group")
  */
-class AggregateController extends Controller
+class GroupController extends Controller
 {
 
     /**
-     * Lists all Aggregate entities.
+     * Lists all Group entities.
      *
-     * @Route("/", name="aggregate")
+     * @Route("/", name="group")
      * @Method("GET")
      * @Template()
      */
@@ -29,22 +29,22 @@ class AggregateController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('AppBundle:Aggregate')->findAll();
+        $entities = $em->getRepository('AppBundle:Group')->findAll();
 
         return array(
             'entities' => $entities,
         );
     }
     /**
-     * Creates a new Aggregate entity.
+     * Creates a new Group entity.
      *
-     * @Route("/", name="aggregate_create")
+     * @Route("/", name="group_create")
      * @Method("POST")
-     * @Template("AppBundle:Aggregate:new.html.twig")
+     * @Template("AppBundle:Group:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity = new Aggregate();
+        $entity = new Group();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -53,7 +53,7 @@ class AggregateController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('aggregate_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('group_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -63,16 +63,16 @@ class AggregateController extends Controller
     }
 
     /**
-     * Creates a form to create a Aggregate entity.
+     * Creates a form to create a Group entity.
      *
-     * @param Aggregate $entity The entity
+     * @param Group $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Aggregate $entity)
+    private function createCreateForm(Group $entity)
     {
-        $form = $this->createForm(new AggregateType(), $entity, array(
-            'action' => $this->generateUrl('aggregate_create'),
+        $form = $this->createForm(new GroupType(), $entity, array(
+            'action' => $this->generateUrl('group_create'),
             'method' => 'POST',
         ));
 
@@ -82,15 +82,15 @@ class AggregateController extends Controller
     }
 
     /**
-     * Displays a form to create a new Aggregate entity.
+     * Displays a form to create a new Group entity.
      *
-     * @Route("/new", name="aggregate_new")
+     * @Route("/new", name="group_new")
      * @Method("GET")
      * @Template()
      */
     public function newAction()
     {
-        $entity = new Aggregate();
+        $entity = new Group();
         $form   = $this->createCreateForm($entity);
 
         return array(
@@ -100,9 +100,9 @@ class AggregateController extends Controller
     }
 
     /**
-     * Finds and displays a Aggregate entity.
+     * Finds and displays a Group entity.
      *
-     * @Route("/{id}", name="cheerup_aggregate_show")
+     * @Route("/{id}", name="cheerup_group_show")
      * @Method("GET")
      * @Template()
      */
@@ -110,24 +110,24 @@ class AggregateController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $aggregate = $em->getRepository('AppBundle:Aggregate')->find($id);
+        $group = $em->getRepository('AppBundle:Group')->find($id);
 
-        if (!$aggregate) {
-            throw $this->createNotFoundException('Unable to find Aggregate aggregate.');
+        if (!$group) {
+            throw $this->createNotFoundException('Unable to find Group group.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'aggregate'      => $aggregate,
+            'group'      => $group,
             'delete_form' => $deleteForm->createView(),
         );
     }
 
     /**
-     * Displays a form to edit an existing Aggregate entity.
+     * Displays a form to edit an existing Group entity.
      *
-     * @Route("/{id}/edit", name="aggregate_edit")
+     * @Route("/{id}/edit", name="group_edit")
      * @Method("GET")
      * @Template()
      */
@@ -135,10 +135,10 @@ class AggregateController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppBundle:Aggregate')->find($id);
+        $entity = $em->getRepository('AppBundle:Group')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Aggregate entity.');
+            throw $this->createNotFoundException('Unable to find Group entity.');
         }
 
         $editForm = $this->createEditForm($entity);
@@ -152,16 +152,16 @@ class AggregateController extends Controller
     }
 
     /**
-    * Creates a form to edit a Aggregate entity.
+    * Creates a form to edit a Group entity.
     *
-    * @param Aggregate $entity The entity
+    * @param Group $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Aggregate $entity)
+    private function createEditForm(Group $entity)
     {
-        $form = $this->createForm(new AggregateType(), $entity, array(
-            'action' => $this->generateUrl('aggregate_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new GroupType(), $entity, array(
+            'action' => $this->generateUrl('group_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -170,20 +170,20 @@ class AggregateController extends Controller
         return $form;
     }
     /**
-     * Edits an existing Aggregate entity.
+     * Edits an existing Group entity.
      *
-     * @Route("/{id}", name="aggregate_update")
+     * @Route("/{id}", name="group_update")
      * @Method("PUT")
-     * @Template("AppBundle:Aggregate:edit.html.twig")
+     * @Template("AppBundle:Group:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppBundle:Aggregate')->find($id);
+        $entity = $em->getRepository('AppBundle:Group')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Aggregate entity.');
+            throw $this->createNotFoundException('Unable to find Group entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -193,7 +193,7 @@ class AggregateController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('aggregate_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('group_edit', array('id' => $id)));
         }
 
         return array(
@@ -203,9 +203,9 @@ class AggregateController extends Controller
         );
     }
     /**
-     * Deletes a Aggregate entity.
+     * Deletes a Group entity.
      *
-     * @Route("/{id}", name="aggregate_delete")
+     * @Route("/{id}", name="group_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -215,21 +215,21 @@ class AggregateController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('AppBundle:Aggregate')->find($id);
+            $entity = $em->getRepository('AppBundle:Group')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Aggregate entity.');
+                throw $this->createNotFoundException('Unable to find Group entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('aggregate'));
+        return $this->redirect($this->generateUrl('group'));
     }
 
     /**
-     * Creates a form to delete a Aggregate entity by id.
+     * Creates a form to delete a Group entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -238,7 +238,7 @@ class AggregateController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('aggregate_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('group_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

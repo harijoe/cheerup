@@ -15,7 +15,7 @@ user:
         network_volunteer: Volontaire du réseau Cheer Up!
         former_member: Bénévole ou ancien
 
-aggregate:
+group:
     type:
         group: Groupe
         offshoot: Antenne
@@ -74,7 +74,7 @@ profile:
     view:
         title: Profil de %fullname%
 
-aggregate:
+group:
     header:
         helper:
             OFFSHOOT: Antenne
@@ -83,12 +83,12 @@ aggregate:
 admin:
     index:
         title: Administration
-        aggregate:
+        group:
             create:
-                title: Ajout d'un agrégat
+                title: Ajout d'un groupe
                 success: Agrégat crée avec succès
                 submit: Ajouter
                 field:
                     name: Nom
                     description: Description
-                    aggregateType: Type d'agrégat
+                    offshoot: Est une antenne Cheerup ?

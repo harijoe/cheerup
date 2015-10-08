@@ -8,21 +8,16 @@ use Symfony\Component\Validator\Constraints as Assert;
 use UserBundle\Entity\User;
 
 /**
- * Aggregate
+ * Group
  *
  * @ORM\Entity
  * @UniqueEntity("name")
- * @ORM\Table(name="cheerup_aggregate")
+ * @ORM\Table(name="cheerup_group")
  */
-class Aggregate
+class Group
 {
     const GROUP    = 'GROUP';
     const OFFSHOOT = 'OFFSHOOT';
-
-    private static $aggregateTypes = [
-        self::GROUP    => 'aggregate.type.group',
-        self::OFFSHOOT => 'aggregate.type.offshoot'
-    ];
 
     /**
      * @var integer
@@ -54,12 +49,9 @@ class Aggregate
     private $picture;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     *
-     * @Assert\NotBlank()
-     * @Assert\Choice(callback = "getAggregateTypes")
+     * @ORM\Column(type="boolean", length=255)
      */
-    private $aggregateType;
+    private $offshoot = false;
 
     /**
      * @ORM\OneToMany(targetEntity="UserBundle\Entity\User", mappedBy="offshootOfOrigin")
@@ -81,7 +73,7 @@ class Aggregate
      *
      * @param string $name
      *
-     * @return Aggregate
+     * @return Group
      */
     public function setName($name)
     {
@@ -105,7 +97,7 @@ class Aggregate
      *
      * @param string $description
      *
-     * @return Aggregate
+     * @return Group
      */
     public function setDescription($description)
     {
@@ -125,7 +117,7 @@ class Aggregate
     }
 
     /**
-     * @return mixed
+     * @return Picture
      */
     public function getPicture()
     {
@@ -133,7 +125,7 @@ class Aggregate
     }
 
     /**
-     * @param mixed $picture
+     * @param Picture $picture
      */
     public function setPicture($picture)
     {
@@ -141,35 +133,15 @@ class Aggregate
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getAggregateType()
+    public function getGroupType()
     {
-        return $this->aggregateType;
-    }
+        if ($this->isOffshoot()) {
+            return $this::OFFSHOOT;
+        }
 
-    /**
-     * @param string $aggregateType
-     */
-    public function setAggregateType($aggregateType)
-    {
-        $this->aggregateType = $aggregateType;
-    }
-
-    /**
-     * @return array
-     */
-    public static function getAggregateTypes()
-    {
-        return array_keys(self::$aggregateTypes);
-    }
-
-    /**
-     * @return array
-     */
-    public static function getAggregateTypesChoices()
-    {
-        return self::$aggregateTypes;
+        return $this::GROUP;
     }
 
     /**
@@ -188,5 +160,19 @@ class Aggregate
         $this->members = $members;
     }
 
+    /**
+     * @return boolean
+     */
+    public function isOffshoot()
+    {
+        return $this->offshoot;
+    }
 
+    /**
+     * @param boolean $offshoot
+     */
+    public function setOffshoot($offshoot)
+    {
+        $this->offshoot = $offshoot;
+    }
 }

@@ -71,7 +71,7 @@ fos_user:
         address:        "%fosub_sender_address%"
         sender_name:    "%fosub_sender_name%"
     group:
-        group_class: UserBundle\Entity\Group
+        group_class: UserBundle\Entity\SecurityGroup
 
 # LiipImagineBundle Configuration
 liip_imagine:

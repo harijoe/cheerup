@@ -3,6 +3,7 @@
 namespace UserBundle\DataFixtures\ORM;
 
 use AppBundle\Entity\Aggregate;
+use AppBundle\Entity\Group;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -24,7 +25,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
         $user1->setProfileType('FORMER_MEMBER');
         $user1->setEnabled(true);
 
-        $aggregate = $this->getReference('offshoot');
+        $offshoot = $this->getReference('offshoot');
 
         $user2 = new User();
         $user2->setFirstname('Marcel');
@@ -33,7 +34,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
         $user2->setEmail('user2@mail.com');
         $user2->setProfileType('FORMER_MEMBER');
         $user2->setEnabled(true);
-        $user2->setOffshootOfOrigin($aggregate);
+        $user2->setOffshootOfOrigin($offshoot);
 
         $manager->persist($user1);
         $manager->persist($user2);

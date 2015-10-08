@@ -14,26 +14,34 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->remove('username')
-            ->add('profileType',
-            'choice', [
-                'label'   => 'register.field.profile_type',
-                'choices' => User::getProfileTypesChoices()
-            ])
-            ->add('offshootOfOrigin', 'entity', array(
-                'class' => 'AppBundle\Entity\Aggregate',
-                'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('a')
-                        ->where('a.aggregateType = \''.Aggregate::OFFSHOOT.'\'');
-                },
-                'choice_label' => 'name',
-            ))
-            ->add('firstname', null, [
-                'label' => 'register.field.firstname'
-            ])
-            ->add('lastname', null, [
-                'label' => 'register.field.lastname'
-            ])
-        ;
+            ->add(
+                'profileType',
+                'choice', [
+                    'label'   => 'register.field.profile_type',
+                    'choices' => User::getProfileTypesChoices()
+                ])
+            ->add(
+                'offshootOfOrigin',
+                'entity', [
+                    'class'         => 'AppBundle\Entity\Group',
+                    'query_builder' => function (EntityRepository $er) {
+                        return $er->createQueryBuilder('a')
+                            ->where('a.offshoot = true');
+                    },
+                    'label'         => 'register.field.offshootOfOrigin ',
+                    'choice_label'  => 'name',
+                ])
+            ->add(
+                'firstname',
+                null, [
+                    'label' => 'register.field.firstname'
+                ])
+            ->add(
+                'lastname',
+                null, [
+                    'label' => 'register.field.lastname'
+                ])
+            ;
     }
 
     public function getParent()

@@ -6,9 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="cheerup_group")
+ * @ORM\Table(name="cheerup_security_group")
  */
-class Group extends BaseGroup
+class SecurityGroup extends BaseGroup
 {
     /**
      * @ORM\Id

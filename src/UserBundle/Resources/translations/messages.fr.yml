@@ -26,6 +26,7 @@ register:
         profile_type: Type de profil :
         firstname: Prénom :
         lastname: Nom :
+        offshootOfOrigin: Antenne d'origine :
     confirmed:
         title: Inscription confirmée
     check_email:

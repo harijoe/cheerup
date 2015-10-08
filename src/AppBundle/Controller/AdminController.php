@@ -2,17 +2,12 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Aggregate;
-use AppBundle\Entity\Picture;
-use AppBundle\Entity\UserProfile;
-use AppBundle\Form\Type\AggregateType;
-use AppBundle\Form\Type\PictureFormType;
+use AppBundle\Entity\Group;
+use AppBundle\Form\Type\GroupType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Config;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use UserBundle\Entity\User;
-use AppBundle\Form\Type\UserProfileFormType;
 
 /**
  * Profile controller.
@@ -32,23 +27,23 @@ class AdminController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $aggregate = new Aggregate();
-        $form = $this->createForm(new AggregateType(), $aggregate);
+        $group = new Group();
+        $form = $this->createForm(new GroupType(), $group);
 
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($aggregate);
+            $em->persist($group);
             $em->flush();
             $this->addFlash(
                 'success',
-                $this->get('translator')->trans('admin.index.aggregate.create.success')
+                $this->get('translator')->trans('admin.index.group.create.success')
             );
         }
 
         return array(
-            'aggregate' => $aggregate,
+            'group' => $group,
             'form'   => $form->createView(),
         );
     }

@@ -7,6 +7,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use UserBundle\Entity\Group;
+use UserBundle\Entity\SecurityGroup;
 use UserBundle\Entity\User;
 
 class InitDbCommand extends ContainerAwareCommand
@@ -28,16 +29,16 @@ class InitDbCommand extends ContainerAwareCommand
         if ($adminUser)
             $entityManager->remove($adminUser);
 
-        $adminGroupList = $entityManager->getRepository('UserBundle:Group')->findByName('admin');
-        $adminGroup = array_pop($adminGroupList);
-        if ($adminGroup)
-            $entityManager->remove($adminGroup);
+        $adminSecurityGroupList = $entityManager->getRepository('UserBundle:SecurityGroup')->findByName('admin');
+        $adminSecurityGroup = array_pop($adminSecurityGroupList);
+        if ($adminSecurityGroup)
+            $entityManager->remove($adminSecurityGroup);
 
         $entityManager->flush();
         $output->writeln('Existing entities removed');
 
-        $adminGroup = new Group('admin');
-        $adminGroup->addRole('ROLE_ADMIN');
+        $adminSecurityGroup = new SecurityGroup('admin');
+        $adminSecurityGroup->addRole('ROLE_ADMIN');
         $adminUser = new User();
         $adminUser->setEnabled(true);
         $adminUser->setUsername('admin');
@@ -46,9 +47,9 @@ class InitDbCommand extends ContainerAwareCommand
         $adminUser->setFirstname('admin');
         $adminUser->setLastname('admin');
         $adminUser->setProfileType(User::NETWORK_VOLUNTEER);
-        $adminUser->addGroup($adminGroup);
+        $adminUser->addSecurityGroup($adminSecurityGroup);
 
-        $entityManager->persist($adminGroup);
+        $entityManager->persist($adminSecurityGroup);
         $entityManager->persist($adminUser);
         $entityManager->flush();
 

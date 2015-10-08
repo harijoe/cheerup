@@ -1,10 +1,12 @@
 <?php
 namespace UserBundle\Entity;
 
-use AppBundle\Entity\Aggregate;
+use AppBundle\Entity\Group;
 use AppBundle\Entity\UserProfile;
+use Doctrine\Common\Collections\Collection;
 use FOS\UserBundle\Entity\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\GroupInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -59,19 +61,21 @@ class User extends BaseUser
     private $userProfile;
 
     /**
-     * @var Aggregate
+     * @var Group
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Aggregate", inversedBy="members")
-     * @ORM\JoinColumn(name="aggregate_id", referencedColumnName="id", nullable=true)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Group", inversedBy="members")
+     * @ORM\JoinColumn(name="group_id", referencedColumnName="id", nullable=true)
      */
     private $offshootOfOrigin;
 
     /**
-     * @ORM\ManyToMany(targetEntity="UserBundle\Entity\Group")
-     * @ORM\JoinTable(name="cheerup_user_user_group",
+     * @ORM\ManyToMany(targetEntity="UserBundle\Entity\SecurityGroup")
+     * @ORM\JoinTable(name="cheerup_user_user_security_group",
      *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")}
+     *      inverseJoinColumns={@ORM\JoinColumn(name="security_group_id", referencedColumnName="id")}
      * )
+     *
+     * This entity has to be named $groups and not $securityGroups because it is meant to override its parent
      */
     protected $groups;
 
@@ -189,7 +193,7 @@ class User extends BaseUser
     }
 
     /**
-     * @return Aggregate
+     * @return Group
      */
     public function getOffshootOfOrigin()
     {
@@ -197,10 +201,44 @@ class User extends BaseUser
     }
 
     /**
-     * @param Aggregate $offshootOfOrigin
+     * @param Group $offshootOfOrigin
      */
     public function setOffshootOfOrigin($offshootOfOrigin)
     {
         $this->offshootOfOrigin = $offshootOfOrigin;
+    }
+
+    /**
+     * Aliases of AbstractUser groups
+     */
+
+    /**
+     * Gets the groups granted to the user.
+     *
+     * @return Collection
+     */
+    public function getSecurityGroups()
+    {
+        return parent::getGroups();
+    }
+
+    public function getSecurityGroupNames()
+    {
+        return parent::getGroupNames();
+    }
+
+    public function hasSecurityGroup($name)
+    {
+        return parent::hasGroup($name);
+    }
+
+    public function addSecurityGroup(GroupInterface $group)
+    {
+        return parent::addGroup($group);
+    }
+
+    public function removeSecurityGroup(GroupInterface $group)
+    {
+        return parent::removeGroup($group);
     }
 }

@@ -7,27 +7,24 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class AggregateType extends AbstractType
+class GroupType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('name', null, [
-                'label'   => 'admin.index.aggregate.create.field.name'
+                'label' => 'admin.index.group.create.field.name'
             ])
             ->add('description', null, [
-                'label'   => 'admin.index.aggregate.create.field.description'
+                'label' => 'admin.index.group.create.field.description'
             ])
-            ->add('aggregateType',
-                'choice', [
-                    'label'   => 'admin.index.aggregate.create.field.aggregateType',
-                    'choices' => Aggregate::getAggregateTypesChoices()
-                ])
-        ;
+            ->add('offshoot', null, [
+                'label' => 'admin.index.group.create.field.offshoot'
+            ]);
     }
 
     /**
@@ -35,9 +32,11 @@ class AggregateType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Aggregate'
-        ));
+        $resolver->setDefaults(
+            [
+                'data_class' => 'AppBundle\Entity\Group'
+            ]
+        );
     }
 
     /**
@@ -45,6 +44,6 @@ class AggregateType extends AbstractType
      */
     public function getName()
     {
-        return 'appbundle_aggregate';
+        return 'appbundle_group';
     }
 }
