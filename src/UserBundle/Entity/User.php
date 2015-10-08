@@ -75,6 +75,12 @@ class User extends BaseUser
      */
     protected $groups;
 
+    public function __construct()
+    {
+        parent::__construct();
+        $this->userProfile = new UserProfile();
+    }
+
     /**
      * @return string
      */
@@ -113,12 +119,6 @@ class User extends BaseUser
     public function setLastname($lastname)
     {
         $this->lastname = $lastname;
-    }
-
-    public function __construct()
-    {
-        parent::__construct();
-        $this->userProfile = new UserProfile();
     }
 
     public function getFullName()

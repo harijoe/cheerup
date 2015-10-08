@@ -9,4 +9,5 @@
     {{ form_row(form.firstname) }}
     {{ form_row(form.lastname) }}
     <input id="_submit" name="_submit" class="btn btn-lg btn-default btn-success btn-block" type="submit" value="{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}" />
+    {{ form_rest(form) }}
 </form>
