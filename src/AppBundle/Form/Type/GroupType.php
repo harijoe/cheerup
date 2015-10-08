@@ -22,8 +22,12 @@ class GroupType extends AbstractType
             ->add('description', null, [
                 'label' => 'admin.index.group.create.field.description'
             ])
-            ->add('offshoot', null, [
-                'label' => 'admin.index.group.create.field.offshoot'
+            ->add('offshoot', 'choice', [
+                'label' => 'admin.index.group.create.field.offshoot',
+                'choices' => [
+                    true => 'admin.index.group.create.field.is_offshoot',
+                    false => 'admin.index.group.create.field.is_not_offshoot',
+                ],
             ]);
     }
 

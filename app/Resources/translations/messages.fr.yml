@@ -97,9 +97,11 @@ admin:
         group:
             create:
                 title: Ajout d'un groupe
-                success: Agrégat crée avec succès
+                success: Groupe crée avec succès
                 submit: Ajouter
                 field:
                     name: Nom
                     description: Description
-                    offshoot: Est une antenne Cheerup ?
+                    offshoot: Type de groupe
+                    is_not_offshoot: Équipe fédérale
+                    is_offshoot: Antenne Cheerup

@@ -28,7 +28,7 @@ class RegistrationFormType extends AbstractType
                         return $er->createQueryBuilder('a')
                             ->where('a.offshoot = true');
                     },
-                    'label'         => 'register.field.offshootOfOrigin ',
+                    'label'         => 'register.field.offshootOfOrigin',
                     'choice_label'  => 'name',
                 ])
             ->add(
