@@ -8,7 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use AppBundle\Entity\Group;
-use AppBundle\Form\GroupType;
+use AppBundle\Form\GroupFormType;
 
 /**
  * Group controller.
@@ -71,7 +71,7 @@ class GroupController extends Controller
      */
     private function createCreateForm(Group $entity)
     {
-        $form = $this->createForm(new GroupType(), $entity, array(
+        $form = $this->createForm(new GroupFormType(), $entity, array(
             'action' => $this->generateUrl('group_create'),
             'method' => 'POST',
         ));
@@ -160,7 +160,7 @@ class GroupController extends Controller
     */
     private function createEditForm(Group $entity)
     {
-        $form = $this->createForm(new GroupType(), $entity, array(
+        $form = $this->createForm(new GroupFormType(), $entity, array(
             'action' => $this->generateUrl('group_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));

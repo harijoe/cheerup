@@ -3,7 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Group;
-use AppBundle\Form\Type\GroupType;
+use AppBundle\Form\Type\GroupFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Config;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,7 +28,7 @@ class AdminController extends Controller
     public function indexAction(Request $request)
     {
         $group = new Group();
-        $form = $this->createForm(new GroupType(), $group);
+        $form = $this->createForm(new GroupFormType(), $group);
 
         $form->handleRequest($request);
 
