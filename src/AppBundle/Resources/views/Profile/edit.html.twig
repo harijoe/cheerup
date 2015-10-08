@@ -103,6 +103,21 @@
             </div>
         </div>
         <!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+            <div class="panel panel-red">
+                <div class="panel-heading">
+                    {{ 'profile.edit.change_password.title'|trans }}
+                </div>
+                <div class="panel-body">
+                    {{ form_start(form_change_password) }}
+                    {{ form_row(form_change_password.current_password) }}
+                    {{ form_row(form_change_password.new) }}
+                    <input class="btn btn-lg btn-default btn-default btn-block" type="submit"
+                    value="{{ 'profile.edit.change_password.submit'|trans }}"/>
+                    {{ form_end(form_change_password) }}
+                </div>
+            </div>
+        </div>
     </div>
     <!-- /.row -->
 {% endblock %}

@@ -67,6 +67,10 @@ profile:
             title: Photo de profil
             choose_file: Choisir une photo
             success: Photo mise à jour avec succès !
+        change_password:
+            title: Changement de mot de passe
+            success: Votre mot de passe a été mis à jour avec succès
+            submit: Enregistrer
 
         offshoot_of_origin:
             title: Antenne d'origine

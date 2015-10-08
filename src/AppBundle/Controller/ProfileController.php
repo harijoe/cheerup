@@ -52,9 +52,12 @@ class ProfileController extends Controller
 
         $formUserProfile = $this->createForm(new UserProfileFormType(), $userProfile);
         $formPicture     = $this->createForm(new PictureFormType(), $picture, ['validation_groups' => 'profile']);
+        $formChangePassword = $this->container->get('fos_user.change_password.form');
+        $formChangePasswordHandler = $this->container->get('fos_user.change_password.form.handler');
 
         $formUserProfile->handleRequest($request);
         $formPicture->handleRequest($request);
+        $processChangePassword = $formChangePasswordHandler->process($user);
 
         if ($formUserProfile->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -66,8 +69,6 @@ class ProfileController extends Controller
                 'success',
                 $this->get('translator')->trans('profile.edit.user_profile.success')
             );
-
-            return $this->redirectToRoute('cheerup_profile_edit');
         }
         if ($formPicture->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -81,15 +82,20 @@ class ProfileController extends Controller
                 'success',
                 $this->get('translator')->trans('profile.edit.picture.success')
             );
-
-            return $this->redirectToRoute('cheerup_profile_edit');
+        }
+        if ($processChangePassword) {
+            $this->addFlash(
+                'success',
+                $this->get('translator')->trans('profile.edit.change_password.success')
+            );
         }
 
         return [
             'offshoot_of_origin'       => $user->getOffshootOfOrigin(),
             'current_picture_web_path' => $currentPictureWebPath,
             'form_user_profile'        => $formUserProfile->createView(),
-            'form_picture'             => $formPicture->createView()
+            'form_picture'             => $formPicture->createView(),
+            'form_change_password'    => $formChangePassword->createView()
         ];
     }
 }
