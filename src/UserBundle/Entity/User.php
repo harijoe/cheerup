@@ -31,26 +31,26 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(name="profile_type", type="string", length=255)
      *
      * @Assert\NotBlank()
      * @Assert\Choice(callback = "getProfileTypes")
      */
-    protected $profileType;
+    private $profileType;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(name="firstname", type="string", length=255)
      *
      * @Assert\NotBlank()
      */
-    protected $firstname;
+    private $firstname;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(name="lastname", type="string", length=255)
      *
      * @Assert\NotBlank()
      */
-    protected $lastname;
+    private $lastname;
 
     /**
      * @var UserProfile
@@ -69,15 +69,22 @@ class User extends BaseUser
     private $offshootOfOrigin;
 
     /**
+     * @var SecurityGroup
+     *
      * @ORM\ManyToMany(targetEntity="UserBundle\Entity\SecurityGroup")
      * @ORM\JoinTable(name="cheerup_user_user_security_group",
      *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="security_group_id", referencedColumnName="id")}
      * )
      *
-     * This entity has to be named $groups and not $securityGroups because it is meant to override its parent
+     * This attribute has to be named $groups and not $securityGroups because it is meant to override its parent
      */
     protected $groups;
+
+    /**
+     * @ORM\Column(name="validated", type="boolean", length=255)
+     */
+    private $validated = false;
 
     public function __construct()
     {
@@ -206,6 +213,22 @@ class User extends BaseUser
     public function setOffshootOfOrigin($offshootOfOrigin)
     {
         $this->offshootOfOrigin = $offshootOfOrigin;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isValidated()
+    {
+        return $this->validated;
+    }
+
+    /**
+     * @param boolean $validated
+     */
+    public function setValidated($validated)
+    {
+        $this->validated = $validated;
     }
 
     /**

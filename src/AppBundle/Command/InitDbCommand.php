@@ -46,6 +46,7 @@ class InitDbCommand extends ContainerAwareCommand
         $adminUser->setPlainPassword('admin');
         $adminUser->setFirstname('admin');
         $adminUser->setLastname('admin');
+        $adminUser->setValidated(true);
         $adminUser->setProfileType(User::NETWORK_VOLUNTEER);
         $adminUser->addSecurityGroup($adminSecurityGroup);
 

@@ -1,3 +1,6 @@
+yes: Oui
+no: Non
+
 base:
     title:
         default: Annuaire CheerUp
@@ -71,10 +74,14 @@ profile:
             title: Changement de mot de passe
             success: Votre mot de passe a été mis à jour avec succès
             submit: Enregistrer
-
         offshoot_of_origin:
             title: Antenne d'origine
             link: Voir la page de l'antenne
+        status:
+            title: Statuts
+            keys:
+                profile_type: Type de profil :
+                is_validated: Profil validé :
     view:
         title: Profil de %fullname%
 

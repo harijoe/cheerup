@@ -17,7 +17,7 @@
         </div>
         <!-- /.col-lg-12 -->
 
-        <div class="col-lg-8">
+        <div class="col-lg-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     {{ 'profile.edit.user_profile.title'|trans }}
@@ -51,21 +51,20 @@
                 </div>
             </div>
         </div>
-        <!-- /.col-lg-8 -->
+        <!-- /.col-lg-6 -->
 
-        <div class="col-lg-4">
-
-            {% if offshoot_of_origin is not null %}
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    {{ 'profile.edit.offshoot_of_origin.title'|trans }}
+        <div class="col-lg-6">
+            {% if user.offshootOfOrigin is not null %}
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        {{ 'profile.edit.offshoot_of_origin.title'|trans }}
+                    </div>
+                    <div class="panel-body text-center">
+                        <a href="{{ path('cheerup_group_show', {'id': offshoot_of_origin.id}) }}">
+                            {{ 'profile.edit.offshoot_of_origin.link'|trans }}
+                        </a>
+                    </div>
                 </div>
-                <div class="panel-body text-center">
-                    <a href="{{ path('cheerup_group_show', {'id': offshoot_of_origin.id}) }}">
-                        {{ 'profile.edit.offshoot_of_origin.link'|trans }}
-                    </a>
-                </div>
-            </div>
             {% endif %}
 
             <div class="panel panel-default">
@@ -102,8 +101,34 @@
                 </div>
             </div>
         </div>
-        <!-- /.col-lg-4 -->
-        <div class="col-lg-4">
+        <!-- /.col-lg-6 -->
+
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    {{ 'profile.edit.status.title'|trans }}
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>{{ 'profile.edit.status.keys.profile_type'|trans }}</td>
+                                    <td>{{ ('user.profile_type.'~user.profileType|lower)|trans }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{ 'profile.edit.status.keys.is_validated'|trans }}</td>
+                                    <td>{{ user.validated ? 'yes'|trans:'no'|trans }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.col-lg-6 -->
+
+        <div class="col-lg-6">
             <div class="panel panel-red">
                 <div class="panel-heading">
                     {{ 'profile.edit.change_password.title'|trans }}
@@ -113,11 +138,12 @@
                     {{ form_row(form_change_password.current_password) }}
                     {{ form_row(form_change_password.new) }}
                     <input class="btn btn-lg btn-default btn-default btn-block" type="submit"
-                    value="{{ 'profile.edit.change_password.submit'|trans }}"/>
+                           value="{{ 'profile.edit.change_password.submit'|trans }}"/>
                     {{ form_end(form_change_password) }}
                 </div>
             </div>
         </div>
+        <!-- /.col-lg-6 -->
     </div>
     <!-- /.row -->
 {% endblock %}

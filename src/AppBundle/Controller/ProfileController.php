@@ -91,11 +91,11 @@ class ProfileController extends Controller
         }
 
         return [
-            'offshoot_of_origin'       => $user->getOffshootOfOrigin(),
             'current_picture_web_path' => $currentPictureWebPath,
             'form_user_profile'        => $formUserProfile->createView(),
             'form_picture'             => $formPicture->createView(),
-            'form_change_password'    => $formChangePassword->createView()
+            'form_change_password'     => $formChangePassword->createView(),
+            'user'                     => $user,
         ];
     }
 }
