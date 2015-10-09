@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Group;
 use AppBundle\Form\Type\GroupFormType;
+use AppBundle\Form\Type\UserValidationCollectionFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Config;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,12 +28,17 @@ class AdminController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $group = new Group();
-        $form = $this->createForm(new GroupFormType(), $group);
+        $group                        = new Group();
+        $formGroup                    = $this->createForm(new GroupFormType(), $group);
+        $userRepository               = $this->get('doctrine')->getRepository('UserBundle:User');
+        $notValidatedUsers            = $userRepository->findBy(['validated' => false]);
+        $formUserValidationCollection =
+            $this->createForm(new UserValidationCollectionFormType(), ['users' => $notValidatedUsers]);
 
-        $form->handleRequest($request);
+        $formGroup->handleRequest($request);
+        $formUserValidationCollection->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($formGroup->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($group);
             $em->flush();
@@ -42,9 +48,43 @@ class AdminController extends Controller
             );
         }
 
-        return array(
-            'group' => $group,
-            'form'   => $form->createView(),
-        );
+        if ($formUserValidationCollection->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            foreach ($notValidatedUsers as $notValidatedUser) {
+                $em->persist($notValidatedUser);
+            }
+            $em->flush();
+
+            $beforeSubmitNotValidatedUsers = $notValidatedUsers;
+            $notValidatedUsers             = $userRepository->findBy(['validated' => false]);
+
+            // Handle plural and singular success messages
+            $nbOfValidatedUsers = count($beforeSubmitNotValidatedUsers) - count($notValidatedUsers);
+            $translator         = $this->get('translator');
+            if ($nbOfValidatedUsers == 1) {
+                $successMessage = $translator->trans(
+                    'admin.index.user_validation.success.sing', [
+                        '%nb_of_users%' => count($beforeSubmitNotValidatedUsers) - count($notValidatedUsers)
+                ]);
+                $this->addFlash('success', $successMessage);
+            }
+            if ($nbOfValidatedUsers > 1) {
+                $successMessage = $translator->trans(
+                    'admin.index.user_validation.success.plural', [
+                        '%nb_of_users%' => count($beforeSubmitNotValidatedUsers) - count($notValidatedUsers)
+                ]);
+                $this->addFlash('success', $successMessage);
+            }
+
+
+            // Hide validated users
+            $formUserValidationCollection =
+                $this->createForm(new UserValidationCollectionFormType(), ['users' => $notValidatedUsers]);
+        }
+
+        return [
+            'form_group'                      => $formGroup->createView(),
+            'form_user_validation_collection' => $formUserValidationCollection->createView()
+        ];
     }
 }
