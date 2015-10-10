@@ -1,10 +1,10 @@
-$( document ).ready(function() {
+$(document).ready(function () {
     const FORMER_MEMBER = 'FORMER_MEMBER';
     var $userTypeSelect = $('#fos_user_registration_form_profileType');
     var $offshootSelect = $('#fos_user_registration_form_offshootOfOrigin');
     var $offshootSelectParentBox = $offshootSelect.closest('.box');
 
-    $userTypeSelect.on('change', function() {
+    $userTypeSelect.on('change', function () {
         showOrHideOffshootFormGroup();
     });
 

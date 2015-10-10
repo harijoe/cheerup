@@ -6,12 +6,17 @@ var less = require('gulp-less');
 var concat = require('gulp-concat');
 var sourcemaps = require('gulp-sourcemaps');
 var livereload = require('gulp-livereload');
-var mainBowerFiles = require('main-bower-files');
 var env = process.env.GULP_ENV;
 
 //JAVASCRIPT TASK: write one minified js file out of jquery.js, bootstrap.js and all of my custom js files
 gulp.task('js', function () {
-    var vendorsFiles = mainBowerFiles({filter: /.*\.js$/});
+    var vendorsFiles = [
+        'bower_components/jquery/dist/jquery.min.js',
+        'bower_components/bootstrap/dist/js/bootstrap.min.js',
+        'bower_components/metisMenu/dist/metisMenu.min.js',
+        'bower_components/datatables/media/js/jquery.dataTables.min.js',
+        'bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js'
+    ];
     var appFiles = [
         'app/Resources/public/js/**/*.js',
         'src/**/public/js/**/*.js'
@@ -27,7 +32,14 @@ gulp.task('js', function () {
 
 //CSS TASK: write one minified css file out of bootstrap.less and all of my custom less files
 gulp.task('css', function () {
-    var vendorsFiles = mainBowerFiles({filter: /.*\.css$|.*\.less$/});
+    var vendorsFiles = [
+        'bower_components/bootstrap/dist/css/bootstrap.min.css',
+        'bower_components/metisMenu/dist/metisMenu.min.css',
+        'bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css',
+        'bower_components/datatables-responsive/css/dataTables.responsive.css',
+        'bower_components/startbootstrap-sb-admin-2/dist/css/sb-admin-2.css',
+        'bower_components/font-awesome/css/font-awesome.min.css'
+    ];
     var appFiles = [
         'app/Resources/public/less/**/*.less',
         'src/**/public/less/**/*.less'
@@ -44,19 +56,41 @@ gulp.task('css', function () {
 
 //IMAGE TASK: Just pipe images from project folder to public web folder
 gulp.task('img', function () {
-    return gulp.src('app/Resources/public/images/**/*.*')
+    var vendorsFiles = [
+        'bower_components/**/*.png',
+        'bower_components/**/*.jpg'
+    ];
+    var appFiles = [
+        'app/Resources/public/images/*',
+        'src/**/public/images/*'
+    ];
+    var files = vendorsFiles.concat(appFiles);
+    return gulp.src(files)
+        .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('web/images'));
 });
 
 gulp.task('fonts', function () {
-    var vendorsFiles = mainBowerFiles({filter: /.*\.otf$|.*\.eot$|.*\.svg$|.*\.ttf$|.*\.woff$|.*\.woff2$/})
-    var extraFiles = [
-        'bower_components/bootstrap/fonts/**'
+    var vendorsFiles = [
+        'bower_components/**/*.otf',
+        'bower_components/**/*.eot',
+        'bower_components/**/*.svg',
+        'bower_components/**/*.ttf',
+        'bower_components/**/*.woff',
+        'bower_components/**/*.woff2'
     ];
-    var files = vendorsFiles.concat(extraFiles);
-    return gulp.src(files)
+    var appFiles = [
+        'app/Resources/public/fonts/*',
+        'src/**/public/fonts/*'
+    ];
+    var files = vendorsFiles.concat(appFiles);
+    gulp.src(files)
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('web/fonts'));
+
+    // Special treatment for font-awesome
+    return gulp.src('bower_components/font-awesome/fonts/**.*')
+        .pipe(gulp.dest('./web/fonts')); 
 });
 
 gulp.task('watch', function () {

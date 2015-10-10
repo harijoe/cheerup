@@ -17,27 +17,23 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
      */
     public function load(ObjectManager $manager)
     {
-        $user1 = new User();
-        $user1->setFirstname('Bob');
-        $user1->setLastname('Dylan');
-        $user1->setPlainPassword('user1');
-        $user1->setEmail('user1@mail.com');
-        $user1->setProfileType('FORMER_MEMBER');
-        $user1->setEnabled(true);
+        $rawUsers = [
+            'Bob' => 'Dylan',
+            'Marcel' => 'Pagnol',
+            'George' => 'Lucas',
+            'Mourad' => 'Kashi',
+            'OuiOui' => 'EtSaVoitureJauneEtRouge',
+            'LaPoule'=> 'AuxOeufsDOr',
+            'Johnny' => 'Vacances',
+        ];
+
+        foreach($rawUsers as $firstname => $lastname) {
+            $manager->persist($this->createUser($firstname, $lastname));
+        }
 
         $offshoot = $this->getReference('offshoot');
+        $manager->persist($this->createUser('Julien', 'Vallini', $offshoot));
 
-        $user2 = new User();
-        $user2->setFirstname('Marcel');
-        $user2->setLastname('Pagnol');
-        $user2->setPlainPassword('user2');
-        $user2->setEmail('user2@mail.com');
-        $user2->setProfileType('FORMER_MEMBER');
-        $user2->setEnabled(true);
-        $user2->setOffshootOfOrigin($offshoot);
-
-        $manager->persist($user1);
-        $manager->persist($user2);
         $manager->flush();
     }
 
@@ -47,5 +43,31 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
     public function getOrder()
     {
         return 2;
+    }
+
+    /**
+     * @param string $firstname
+     * @param string $lastname
+     * @param Group  $offshoot
+     *
+     * @return User
+     */
+    private function createUser($firstname, $lastname, $offshoot = null)
+    {
+        $user = new User();
+        $user->setFirstname($firstname);
+        $user->setLastname($lastname);
+        $user->setPlainPassword($firstname);
+        $user->setEmail($firstname.'.@mail.com');
+        $user->setEnabled(true);
+
+        if ($offshoot) {
+            $user->setProfileType(User::FORMER_MEMBER);
+            $user->setOffshootOfOrigin($offshoot);
+        } else {
+            $user->setProfileType(User::NETWORK_VOLUNTEER);
+        }
+
+        return $user;
     }
 }
