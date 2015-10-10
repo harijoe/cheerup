@@ -18,16 +18,17 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
     public function load(ObjectManager $manager)
     {
         $rawUsers = [
-            'Bob' => 'Dylan',
-            'Marcel' => 'Pagnol',
-            'George' => 'Lucas',
-            'Mourad' => 'Kashi',
-            'OuiOui' => 'EtSaVoitureJauneEtRouge',
-            'LaPoule'=> 'AuxOeufsDOr',
-            'Johnny' => 'Vacances',
+            'user1'   => 'user1',
+            'Bob'     => 'Dylan',
+            'Marcel'  => 'Pagnol',
+            'George'  => 'Lucas',
+            'Mourad'  => 'Kashi',
+            'OuiOui'  => 'EtSaVoitureJauneEtRouge',
+            'LaPoule' => 'AuxOeufsDOr',
+            'Johnny'  => 'Vacances',
         ];
 
-        foreach($rawUsers as $firstname => $lastname) {
+        foreach ($rawUsers as $firstname => $lastname) {
             $manager->persist($this->createUser($firstname, $lastname));
         }
 
@@ -58,7 +59,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
         $user->setFirstname($firstname);
         $user->setLastname($lastname);
         $user->setPlainPassword($firstname);
-        $user->setEmail($firstname.'.@mail.com');
+        $user->setEmail($firstname.'@mail.com');
         $user->setEnabled(true);
 
         if ($offshoot) {
