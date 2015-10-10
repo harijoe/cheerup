@@ -107,12 +107,19 @@ admin:
                     is_offshoot: Antenne Cheerup
         user_validation:
             title: Validation des nouveaux utilisateurs
-            submit: Valider
-            success.sing: %nb_of_users% utilisateur a été validé avec succès
-            success.plural: %nb_of_users% utilisateurs ont été validés avec succès
+            validate: Valider
+            delete: Supprimer
+            success:
+                sing:
+                    validate: <strong>%nb_of_users%</strong> utilisateur a été <strong>validé</strong> avec succès
+                    delete: <strong>%nb_of_users%</strong> utilisateur a été <strong>supprimé</strong> avec succès
+                plural:
+                    validate: <strong>%nb_of_users%</strong> utilisateurs ont été <strong>validés</strong> avec succès
+                    delete: <strong>%nb_of_users%</strong> utilisateurs ont été <strong>supprimés</strong> avec succès
             empty: Il n'y a pas de nouveaux utilisateurs en attente de validation
             field:
                 firstname: Prénom
                 lastname: Nom
                 profile_type: Type de profil
                 offshoot_of_origin: Antenne d'origine
+                select: Sélectionner

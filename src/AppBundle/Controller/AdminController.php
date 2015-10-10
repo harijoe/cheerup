@@ -49,12 +49,20 @@ class AdminController extends Controller
         }
 
         if ($formUserValidationCollection->isValid()) {
+            // If delete button was pressed, then we delete the selected users
             $em = $this->getDoctrine()->getManager();
-            foreach ($notValidatedUsers as $notValidatedUser) {
-                $em->persist($notValidatedUser);
+            $action = 'validate';
+            if ($request->request->has('delete')) {
+                $action = 'delete';
+                foreach ($notValidatedUsers as $notValidatedUser) {
+                    if($notValidatedUser->isValidated()) {
+                        $em->remove($notValidatedUser);
+                    }
+                }
             }
             $em->flush();
 
+            // Update user table, but keep old users
             $beforeSubmitNotValidatedUsers = $notValidatedUsers;
             $notValidatedUsers             = $userRepository->findBy(['validated' => false]);
 
@@ -63,19 +71,18 @@ class AdminController extends Controller
             $translator         = $this->get('translator');
             if ($nbOfValidatedUsers == 1) {
                 $successMessage = $translator->trans(
-                    'admin.index.user_validation.success.sing', [
+                    'admin.index.user_validation.success.sing.'.$action, [
                         '%nb_of_users%' => count($beforeSubmitNotValidatedUsers) - count($notValidatedUsers)
                 ]);
                 $this->addFlash('success', $successMessage);
             }
             if ($nbOfValidatedUsers > 1) {
                 $successMessage = $translator->trans(
-                    'admin.index.user_validation.success.plural', [
+                    'admin.index.user_validation.success.plural.'.$action, [
                         '%nb_of_users%' => count($beforeSubmitNotValidatedUsers) - count($notValidatedUsers)
                 ]);
                 $this->addFlash('success', $successMessage);
             }
-
 
             // Hide validated users
             $formUserValidationCollection =
