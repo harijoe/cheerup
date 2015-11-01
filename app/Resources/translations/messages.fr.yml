@@ -14,7 +14,6 @@ home:
         admin: Administration
 user:
     profile_type:
-        cheerup_friend: Ami de Cheer Up!
         network_volunteer: Volontaire du réseau Cheer Up!
         former_member: Bénévole ou ancien
 
