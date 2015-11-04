@@ -19,6 +19,7 @@ gulp.task('js', function () {
         'bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js'
     ];
     var appFiles = [
+        'src/AppBundle/Resources/public/js/vendors/collection.js',
         'app/Resources/public/js/**/*.js',
         'src/**/public/js/**/*.js'
     ];
