@@ -20,3 +20,4 @@
 .idea
 /.composer/
 .viminfo
+npm-debug.log

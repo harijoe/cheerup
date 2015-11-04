@@ -24,12 +24,12 @@ module.exports = function (shipit) {
             }
         },
         staging: {
-            servers: 'ubuntu@52.28.228.154',
+            servers: 'ubuntu@52.29.16.189',
             branch: 'staging',
             deployTo: '/var/www/cheerup-staging'
         },
         prod: {
-            servers: 'ubuntu@52.28.228.154',
+            servers: 'ubuntu@52.29.16.189',
             branch: 'master',
             deployTo: '/var/www/cheerup'
         }
