@@ -131,18 +131,15 @@
         <!-- /.col-lg-6 -->
 
         <div class="col-lg-6">
-            <div class="panel panel-red">
+            <div class="panel panel-red text-center">
                 <div class="panel-heading">
-                    {{ 'profile.edit.change_password.title'|trans }}
+                    {{ 'profile.edit.danger_zone.title'|trans }}
                 </div>
-                <div class="panel-body">
-                    {{ form_start(form_change_password) }}
-                    {{ form_row(form_change_password.current_password) }}
-                    {{ form_row(form_change_password.new) }}
-                    <input class="btn btn-lg btn-default btn-default btn-block" type="submit"
-                           value="{{ 'profile.edit.change_password.submit'|trans }}"/>
-                    {{ form_end(form_change_password) }}
-                </div>
+                <p>
+                    <a href="{{ path('cheerup_profile_danger_zone') }}">
+                        {{ 'profile.edit.danger_zone.button'|trans }}
+                    </a>
+                </p>
             </div>
         </div>
         <!-- /.col-lg-6 -->

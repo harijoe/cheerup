@@ -22,6 +22,34 @@ use AppBundle\Form\Type\UserProfileFormType;
 class ProfileController extends Controller
 {
     /**
+     * @param Request $request
+     * @Config\Route("/danger-zone", name="cheerup_profile_danger_zone")
+     * @Config\Template()
+     * @Config\Security("has_role('ROLE_USER')")
+     *
+     * @return array
+     */
+    public function dangerZoneAction() {
+        $user = $this->getUser();
+        $formChangePassword = $this->container->get('fos_user.change_password.form');
+        $formChangePasswordHandler = $this->container->get('fos_user.change_password.form.handler');
+
+        $processChangePassword = $formChangePasswordHandler->process($user);
+
+        if ($processChangePassword) {
+            $this->addFlash(
+                'success',
+                $this->get('translator')->trans('profile.edit.change_password.success')
+            );
+        }
+
+        return [
+            'form_change_password'     => $formChangePassword->createView(),
+            'user'                     => $user,
+        ];
+    }
+
+    /**
      * @param User $user
      *
      * @Config\Route("/{id}", name="cheerup_profile_view")
@@ -56,13 +84,10 @@ class ProfileController extends Controller
         $formPicture     = $this->createForm(new PictureFormType(), $picture, ['validation_groups' => 'profile']);
         $formCheerupPositions = $this->createForm(new CheerupPositionCollectionFormType(), $userProfile);
 
-        $formChangePassword = $this->container->get('fos_user.change_password.form');
-        $formChangePasswordHandler = $this->container->get('fos_user.change_password.form.handler');
 
         $formUserProfile->handleRequest($request);
         $formPicture->handleRequest($request);
         $formCheerupPositions->handleRequest($request);
-        $processChangePassword = $formChangePasswordHandler->process($user);
 
         if ($formUserProfile->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -99,19 +124,12 @@ class ProfileController extends Controller
                 $this->get('translator')->trans('profile.edit.cheerup_positions.success')
             );
         }
-        if ($processChangePassword) {
-            $this->addFlash(
-                'success',
-                $this->get('translator')->trans('profile.edit.change_password.success')
-            );
-        }
 
         return [
             'current_picture_web_path' => $currentPictureWebPath,
             'form_user_profile'        => $formUserProfile->createView(),
             'form_picture'             => $formPicture->createView(),
             'form_cheerup_positions'   => $formCheerupPositions->createView(),
-            'form_change_password'     => $formChangePassword->createView(),
             'user'                     => $user,
         ];
     }

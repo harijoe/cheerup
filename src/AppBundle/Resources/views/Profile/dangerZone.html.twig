@@ -1,0 +1,42 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">{{ 'profile.edit.danger_zone.title'|trans }}
+                <small>{{ user.fullname }}</small>
+            </h1>
+        </div>
+
+        <div class="col-lg-12">
+            {% for flashMessage in app.session.flashbag.get('success') %}
+                <div class="alert alert-success alert-dismissable">
+                    {{ flashMessage }}
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                </div>
+            {% endfor %}
+        </div>
+        <!-- /.col-lg-12 -->
+
+        <!-- /.col-lg-12 -->
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6">
+            <div class="panel panel-red">
+                <div class="panel-heading">
+                    {{ 'profile.edit.change_password.title'|trans }}
+                </div>
+                <div class="panel-body">
+                    {{ form_start(form_change_password) }}
+                    {{ form_row(form_change_password.current_password) }}
+                    {{ form_row(form_change_password.new) }}
+                    <input class="btn btn-lg btn-default btn-default btn-block" type="submit"
+                           value="{{ 'profile.edit.change_password.submit'|trans }}"/>
+                    {{ form_end(form_change_password) }}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3"></div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+{% endblock %}

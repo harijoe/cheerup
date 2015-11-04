@@ -70,10 +70,13 @@ profile:
             title: Photo de profil
             choose_file: Choisir une photo
             success: Photo mise à jour avec succès !
+        danger_zone:
+            title: Zone de danger
+            button: Accéder à la zone de danger
         change_password:
-            title: Changement de mot de passe
             success: Votre mot de passe a été mis à jour avec succès
             submit: Enregistrer
+            title: Mot de passe
         offshoot_of_origin:
             title: Antenne d'origine
             link: Voir la page de l'antenne
