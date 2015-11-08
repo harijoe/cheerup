@@ -13,6 +13,7 @@ gulp.task('js', function () {
     var vendorsFiles = [
         'bower_components/jquery/dist/jquery.min.js',
         'bower_components/bootstrap/dist/js/bootstrap.min.js',
+        'bower_components/jquery-ui/jquery-ui.min.js',
         'bower_components/metisMenu/dist/metisMenu.min.js',
         'bower_components/datatables/media/js/jquery.dataTables.min.js',
         'bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js',
@@ -86,19 +87,25 @@ gulp.task('fonts', function () {
         'app/Resources/public/fonts/*',
         'src/**/public/fonts/*'
     ];
+
     var files = vendorsFiles.concat(appFiles);
     gulp.src(files)
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('web/fonts'));
 
     // Special treatment for font-awesome
-    return gulp.src('bower_components/font-awesome/fonts/**.*')
+    gulp.src('bower_components/font-awesome/fonts/**.*')
+        .pipe(gulp.dest('./web/fonts')); 
+
+    // Special treatment for bootstrap
+    return gulp.src('bower_components/bootstrap/dist/fonts/**.*')
         .pipe(gulp.dest('./web/fonts')); 
 });
 
 gulp.task('watch', function () {
     livereload.listen();
-    return gulp.watch('src/AppBundle/Resources/public/less/*.less', ['css']);
+    gulp.watch('src/AppBundle/Resources/public/less/*.less', ['css']);
+    return gulp.watch('src/**/*.js', ['js']);
 });
 
 //define executable tasks when running "gulp" command

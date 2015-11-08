@@ -11,15 +11,15 @@ class CheerupPositionFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $dateOptons = [
+        $dateOptions = [
             'label'  => false,
             'html5'  => false,
             'widget' => 'single_text',
-            'attr'   => ['class' => 'form-control actual_range']
+            'attr'   => ['class' => 'form-control range_input']
         ];
 
-        $builder->add('startDate', 'date', $dateOptons)
-            ->add('endDate', 'date', $dateOptons)
+        $builder->add('startDate', 'date', $dateOptions)
+            ->add('endDate', 'date', $dateOptions)
             ->add(
                 'title',
                 null,
