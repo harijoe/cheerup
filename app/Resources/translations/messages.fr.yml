@@ -91,7 +91,7 @@ profile:
             delete: Supprimer
             empty: Aucun poste renseigné pour le moment
             submit: Sauvegarder
-            add: Ajouter une position
+            add: Ajouter un poste
             fields:
                 title: Intitulé
                 start_date: Début
