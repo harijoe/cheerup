@@ -45,7 +45,7 @@
                         {{ form_row(form_user_profile.linkedInProfile) }}
                         {{ form_row(form_user_profile.personalWebsite) }}
                         <div class="text-center">
-                            <input class="btn btn-lg btn-default btn-success btn-block" type="submit"
+                            <input class="btn btn-lg btn-success btn-block" type="submit"
                                    value="{{ 'profile.edit.user_profile.submit'|trans }}"/>
                         </div>
                     </div>
@@ -90,11 +90,11 @@
                             {{ form_errors(form_picture.file) }}
                         </div>
                         <div class="btn-group" role="group">
-                            <span class="btn btn-lg btn-default btn-default btn-file">
+                            <span class="btn btn-lg btn-default btn-file">
                                 {{ 'profile.edit.picture.choose_file'|trans }}
                                 {{ form_widget(form_picture.file) }}
                             </span>
-                            <button type="submit" class="btn btn-lg btn-default btn-success">
+                            <button type="submit" class="btn btn-lg btn-success">
                                 <i class="fa fa-cloud-upload fa-lg"></i>
                             </button>
                         </div>
@@ -145,12 +145,13 @@
         <!-- /.col-lg-6 -->
 
         <div class="col-lg-12">
-            <div class="panel panel-default">
+            <div class="panel panel-default collection_container">
                 <div class="panel-heading">
-                    {{ 'Hello'|trans }}
+                    {{ 'profile.edit.cheerup_positions.title'|trans }} -
+                    <a href="#" class="add_item">{{ 'profile.edit.cheerup_positions.add'|trans }}</a>
                 </div>
                 <div class="panel-body">
-                    <div class="collection_container">
+                    <div class="">
                         {{ form_start(form_cheerup_positions) }}
                         <table class="table table-bordered">
                             <thead>
@@ -169,21 +170,18 @@
                                 {% for position in form_cheerup_positions.cheerupPositions %}
                                     {{ include('AppBundle:Profile:Prototype/cheerup_position.html.twig', { 'form': position }) }}
                                 {% endfor %}
-                            {% else %}
-                                <tr class="cheerup-position-empty-table-message">
-                                    <td colspan="3">
-                                        <div class="alert alert-warning">
-                                            {{ 'profile.edit.cheerup_positions.empty'|trans }}
-                                        </div>
-                                    </td>
-                                </tr>
                             {% endif %}
+                            <tr class="cheerup-position-empty-table-message" style="display: none;">
+                                <td colspan="3">
+                                    <div class="alert alert-warning">
+                                        {{ 'profile.edit.cheerup_positions.empty'|trans }}
+                                    </div>
+                                </td>
+                            </tr>
                             </tbody>
                         </table>
-                        <button class="btn btn-success">SAVE</button>
+                        <button class="btn btn-success btn-block">{{ 'profile.edit.cheerup_positions.submit'|trans }}</button>
                         {{ form_end(form_cheerup_positions) }}
-                        <button class="add_item btn btn-success">Add</button>
-
                     </div>
                 </div>
             </div>

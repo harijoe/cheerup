@@ -12,8 +12,9 @@ class CheerupPositionCollectionFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('cheerupPositions', 'collection', [
-            'type'   => new CheerupPositionFormType(),
-            'allow_add'    => true,
+            'type'      => new CheerupPositionFormType(),
+            'allow_add' => true,
+            'label'     => false,
         ]);
     }
 

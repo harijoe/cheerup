@@ -20,13 +20,9 @@ class CheerupPositionFormType extends AbstractType
 
         $builder->add('startDate', 'date', $dateOptions)
             ->add('endDate', 'date', $dateOptions)
-            ->add(
-                'title',
-                null,
-                [
+            ->add('title', null, [
                     'label' => false,
-                ]
-            );
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

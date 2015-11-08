@@ -90,6 +90,8 @@ profile:
             success: Vos postes Cheerup ont été modifiés avec succès
             delete: Supprimer
             empty: Aucun poste renseigné pour le moment
+            submit: Sauvegarder
+            add: Ajouter une position
             fields:
                 title: Intitulé
                 start_date: Début

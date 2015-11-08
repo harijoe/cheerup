@@ -17,7 +17,7 @@ $(function () {
             this.$collectionHolder = this.$collectionContainer.find(this.options['collection-holder-selector']);
             this.itemPrototype = this.$collectionHolder.data(this.options['prototype-name']);
             this.indexPattern = new RegExp(this.options['index-placeholder'], 'g');
-            this.index = this.$collectionHolder.children().length;
+            this.index = this.$collectionHolder.children().length - 1;
 
             if ('string' === typeof this.options['add-button-selector']) {
                 this.$collectionContainer.on('click', this.options['add-button-selector'], function(event) {
