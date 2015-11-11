@@ -17,7 +17,23 @@ $(document).ready(function () {
     function toDatepicker ($el) {
         $el.datepicker({
             inputs: $el.find('.range_input'),
-            format: 'MM yyyy',
+            format: {
+              /*
+               Say our UI should display a week ahead,
+               but textbox should store the actual date.
+               This is useful if we need UI to select local dates,
+               but store in UTC
+               */
+              toDisplay: function (date, format, language) {
+                var d = new Date(date);
+                //return $.datepicker.formatDate('MM yy', date);
+                return $.datepicker.formatDate('yy-mm-dd', date);
+              },
+              toValue: function (date, format, language) {
+                var d = new Date(date);
+                return $.datepicker.formatDate('yy-mm-dd', date);
+              }
+            },
             viewMode: 'years',
             minViewMode: 'months',
             language: 'fr'
