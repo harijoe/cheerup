@@ -11,10 +11,6 @@
   </div>
   <!-- /.row -->
 
-  {% if allowed_to_edit %}
-    <a href="{{ path('cheerup_profile_edit') }}">{{ 'profile.show.edit_link'|trans }}</a>
-  {% endif %}
-
   <div class="row">
     <div class="col-lg-6">
       <div class="panel panel-default">
@@ -39,6 +35,20 @@
       </div>
     </div>
     <!-- /.col-lg-6 -->
+    {% if allowed_to_edit %}
+     <div class="col-lg-6">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          {{ 'profile.show.edit.title'|trans }}
+        </div>
+        <div class="panel-body text-center">
+          <a href="{{ path('cheerup_profile_edit') }}">
+              {{ 'profile.show.edit.link'|trans }}
+          </a>
+        </div>
+      </div>
+     </div>
+    {% endif %}
   </div>
   <!-- /.row -->
 {% endblock %}

@@ -99,7 +99,9 @@ profile:
     show:
         title: Profile de %fullname%
         empty: Non renseigné
-        edit_link: Editer le profil
+        edit:
+            link: Aller à la page d'édition du profil
+            title: Edition du profil
         user_profile:
             title: Informations générales
             coordinates: Coordonnées
