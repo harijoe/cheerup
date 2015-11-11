@@ -15,6 +15,7 @@ class CheerupPositionCollectionFormType extends AbstractType
             'type'      => new CheerupPositionFormType(),
             'allow_add' => true,
             'label'     => false,
+            'by_reference' => false,
         ]);
     }
 

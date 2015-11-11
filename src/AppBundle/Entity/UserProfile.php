@@ -418,6 +418,7 @@ class UserProfile
     {
         if ($this->getCheerupPositions()->contains($cheerupPosition)) {
             $this->getCheerupPositions()->removeElement($cheerupPosition);
+            $cheerupPosition->setUserProfile(null);
         }
 
         return $this;

@@ -92,6 +92,8 @@ class ProfileController extends Controller
             );
         }
 
+        $userProfile->getCheerupPositions();
+
         return [
             'form_user_profile'        => $formUserProfile->createView(),
             'form_picture'             => $formPicture->createView(),

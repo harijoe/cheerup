@@ -84,9 +84,9 @@
                                 <tr>
                                     <td>{{ position.title }}</td>
                                     <td>
-                                        {{ position.startDate }}
+                                        {{ position.startDate|localizeddate('none', 'none', app.request.locale, false, 'MMMM Y' ) }}
                                         {{ 'to'|trans }}
-                                        {{ position.endDate }}
+                                        {{ position.endDate|localizeddate('none', 'none', app.request.locale, false, 'MMMM Y' ) }}
                                     </td>
                                 </tr>
                             {% endfor %}

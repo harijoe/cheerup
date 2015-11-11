@@ -26,8 +26,7 @@ $(document).ready(function () {
                */
               toDisplay: function (date, format, language) {
                 var d = new Date(date);
-                //return $.datepicker.formatDate('MM yy', date);
-                return $.datepicker.formatDate('yy-mm-dd', date);
+                return $.datepicker.formatDate('MM yy', date);
               },
               toValue: function (date, format, language) {
                 var d = new Date(date);
