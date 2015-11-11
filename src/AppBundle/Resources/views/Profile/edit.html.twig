@@ -74,16 +74,7 @@
                     {{ 'profile.edit.picture.title'|trans }}
                 </div>
                 <div class="panel-body text-center">
-                    {% if current_picture_web_path is not null %}
-                        {% set picture_url = current_picture_web_path %}
-                    {% else %}
-                        {% set picture_url = asset('images/default_profile_picture.jpg') %}
-                    {% endif %}
-                    <img src="{{ picture_url|imagine_filter('profile_thumbnail') }}"
-                         alt="Profile picture thumbnail"
-                         class="img-circle"
-                         style="padding: 15px"
-                        />
+                    {% include 'AppBundle:Components:profile_picture.html.twig' with {'webPath' : user.userProfile.picture.webPath} %}
                     {{ form_start(form_picture) }}
                     <div class="form-group text-center">
                         <div class="has-error">
@@ -151,38 +142,36 @@
                     <a href="#" class="add_item">{{ 'profile.edit.cheerup_positions.add'|trans }}</a>
                 </div>
                 <div class="panel-body">
-                    <div class="">
-                        {{ form_start(form_cheerup_positions) }}
-                        <table class="table table-bordered">
-                            <thead>
-                            <tr>
-                                <th class="col-md-3">Title</th>
-                                <th class="col-md-8">Date range</th>
-                                <th class="col-md-1">Actions</th>
-                            </tr>
-                            </thead>
-                            <tbody class="collection_holder"
-                                   data-prototype="
-                            {% filter escape %}
-                                {{ include('AppBundle:Profile:Prototype/cheerup_position.html.twig', { 'form': form_cheerup_positions.cheerupPositions.vars.prototype }) }}
-                            {% endfilter %}">
-                            {% if form_cheerup_positions.cheerupPositions is not empty %}
-                                {% for position in form_cheerup_positions.cheerupPositions %}
-                                    {{ include('AppBundle:Profile:Prototype/cheerup_position.html.twig', { 'form': position }) }}
-                                {% endfor %}
-                            {% endif %}
-                            <tr class="cheerup-position-empty-table-message" style="display: none;">
-                                <td colspan="3">
-                                    <div class="alert alert-warning">
-                                        {{ 'profile.edit.cheerup_positions.empty'|trans }}
-                                    </div>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <button class="btn btn-success btn-block">{{ 'profile.edit.cheerup_positions.submit'|trans }}</button>
-                        {{ form_end(form_cheerup_positions) }}
-                    </div>
+                    {{ form_start(form_cheerup_positions) }}
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th class="col-md-3">{{ 'profile.edit.cheerup_positions.fields.title'|trans }}</th>
+                            <th class="col-md-8">{{ 'profile.edit.cheerup_positions.fields.date_range'|trans }}</th>
+                            <th class="col-md-1">{{ 'profile.edit.cheerup_positions.fields.actions'|trans }}</th>
+                        </tr>
+                        </thead>
+                        <tbody class="collection_holder"
+                               data-prototype="
+                        {% filter escape %}
+                            {{ include('AppBundle:Profile:Prototype/cheerup_position.html.twig', { 'form': form_cheerup_positions.cheerupPositions.vars.prototype }) }}
+                        {% endfilter %}">
+                        {% if form_cheerup_positions.cheerupPositions is not empty %}
+                            {% for position in form_cheerup_positions.cheerupPositions %}
+                                {{ include('AppBundle:Profile:Prototype/cheerup_position.html.twig', { 'form': position }) }}
+                            {% endfor %}
+                        {% endif %}
+                        <tr class="cheerup-position-empty-table-message" style="display: none;">
+                            <td colspan="3">
+                                <div class="alert alert-warning">
+                                    {{ 'profile.edit.cheerup_positions.empty'|trans }}
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <button class="btn btn-success btn-block">{{ 'profile.edit.cheerup_positions.submit'|trans }}</button>
+                    {{ form_end(form_cheerup_positions) }}
                 </div>
             </div>
         </div>

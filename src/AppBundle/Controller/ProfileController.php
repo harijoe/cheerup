@@ -45,7 +45,6 @@ class ProfileController extends Controller
         $user = $this->getUser();
         /** @var UserProfile $userProfile */
         $userProfile           = $user->getUserProfile();
-        $currentPictureWebPath = $userProfile->getPicture()->getWebPath();
         $picture               = new Picture();
 
         $formUserProfile      = $this->createForm(new UserProfileFormType(), $userProfile);
@@ -94,7 +93,6 @@ class ProfileController extends Controller
         }
 
         return [
-            'current_picture_web_path' => $currentPictureWebPath,
             'form_user_profile'        => $formUserProfile->createView(),
             'form_picture'             => $formPicture->createView(),
             'form_cheerup_positions'   => $formCheerupPositions->createView(),

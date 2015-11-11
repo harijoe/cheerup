@@ -1,67 +1,122 @@
 {% extends 'AppBundle::layout.html.twig' %}
 
 {% block content %}
-  <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-header">
-        {{ 'profile.show.title'|trans({'%fullname%': user.fullname}) }}
-      </h1>
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                {{ 'profile.show.title'|trans({'%fullname%': user.fullname}) }}
+            </h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    {{ 'profile.show.user_profile.title'|trans }}
+                </div>
+                <div class="panel-body">
+                    <div class="list-group">
+                        {{ _self.list_group_item('profile.show.user_profile.fields.first_year_contact'|trans, user.userProfile.firstYearContact) }}
+                        {{ _self.list_group_item('profile.show.user_profile.fields.address'|trans, user.userProfile.address) }}
+                        {{ _self.list_group_item('profile.show.user_profile.fields.additional_address_details'|trans, user.userProfile.additionalAddressDetails) }}
+                        {{ _self.list_group_item('profile.show.user_profile.fields.zip_code'|trans, user.userProfile.zipCode) }}
+                        {{ _self.list_group_item('profile.show.user_profile.fields.city'|trans, user.userProfile.city) }}
+                        {{ _self.list_group_item('profile.show.user_profile.fields.facebook_profile'|trans, user.userProfile.facebookProfile) }}
+                        {{ _self.list_group_item('profile.show.user_profile.fields.twitter_profile'|trans, user.userProfile.twitterProfile) }}
+                        {{ _self.list_group_item('profile.show.user_profile.fields.linked_in_profile'|trans, user.userProfile.linkedInProfile) }}
+                        {{ _self.list_group_item('profile.show.user_profile.fields.personal_website'|trans, user.userProfile.personalWebsite) }}
+                        {{ _self.list_group_item('profile.show.user_profile.fields.phone_number'|trans, user.userProfile.phoneNumber) }}
+                        {{ _self.list_group_item('profile.show.user_profile.fields.cellphone_number'|trans, user.userProfile.cellphoneNumber) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.col-lg-6 -->
+        {% if allowed_to_edit %}
+            <div class="col-lg-6">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        {{ 'profile.show.edit.title'|trans }}
+                    </div>
+                    <div class="panel-body text-center">
+                        <a href="{{ path('cheerup_profile_edit') }}">
+                            {{ 'profile.show.edit.link'|trans }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        <!-- /.col-lg-6 -->
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    {{ 'profile.show.picture.title'|trans }}
+                </div>
+                <div class="panel-body text-center">
+                    {% include 'AppBundle:Components:profile_picture.html.twig' with {'webPath' : user.userProfile.picture.webPath} %}
+                </div>
+            </div>
+        </div>
+        <!-- /.col-lg-6 -->
+    </div>
+    <!-- /.row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default collection_container">
+                <div class="panel-heading">
+                    {{ 'profile.show.cheerup_positions.title'|trans }}
+                </div>
+                <div class="panel-body">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th class="col-md-3">{{ 'profile.show.cheerup_positions.fields.title'|trans }}</th>
+                            <th class="col-md-9">{{ 'profile.show.cheerup_positions.fields.date_range'|trans }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% if user.userProfile.cheerupPositions is not empty %}
+                            {% for position in user.userProfile.cheerupPositions %}
+                                <tr>
+                                    <td>{{ position.title }}</td>
+                                    <td>
+                                        {{ position.startDate }}
+                                        {{ 'to'|trans }}
+                                        {{ position.endDate }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="2">
+                                    <div class="alert alert-warning">
+                                        {{ 'profile.show.cheerup_positions.empty'|trans }}
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- /.col-lg-12 -->
-  </div>
-  <!-- /.row -->
-
-  <div class="row">
-    <div class="col-lg-6">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          {{ 'profile.show.user_profile.title'|trans }}
-        </div>
-        <div class="panel-body">
-          <div class="list-group">
-            {{ _self.list_group_item('profile.show.user_profile.fields.first_year_contact'|trans, user.userProfile.firstYearContact) }}
-            {{ _self.list_group_item('profile.show.user_profile.fields.address'|trans, user.userProfile.address) }}
-            {{ _self.list_group_item('profile.show.user_profile.fields.additional_address_details'|trans, user.userProfile.additionalAddressDetails) }}
-            {{ _self.list_group_item('profile.show.user_profile.fields.zip_code'|trans, user.userProfile.zipCode) }}
-            {{ _self.list_group_item('profile.show.user_profile.fields.city'|trans, user.userProfile.city) }}
-            {{ _self.list_group_item('profile.show.user_profile.fields.facebook_profile'|trans, user.userProfile.facebookProfile) }}
-            {{ _self.list_group_item('profile.show.user_profile.fields.twitter_profile'|trans, user.userProfile.twitterProfile) }}
-            {{ _self.list_group_item('profile.show.user_profile.fields.linked_in_profile'|trans, user.userProfile.linkedInProfile) }}
-            {{ _self.list_group_item('profile.show.user_profile.fields.personal_website'|trans, user.userProfile.personalWebsite) }}
-            {{ _self.list_group_item('profile.show.user_profile.fields.phone_number'|trans, user.userProfile.phoneNumber) }}
-            {{ _self.list_group_item('profile.show.user_profile.fields.cellphone_number'|trans, user.userProfile.cellphoneNumber) }}
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- /.col-lg-6 -->
-    {% if allowed_to_edit %}
-     <div class="col-lg-6">
-      <div class="panel panel-info">
-        <div class="panel-heading">
-          {{ 'profile.show.edit.title'|trans }}
-        </div>
-        <div class="panel-body text-center">
-          <a href="{{ path('cheerup_profile_edit') }}">
-              {{ 'profile.show.edit.link'|trans }}
-          </a>
-        </div>
-      </div>
-     </div>
-    {% endif %}
-  </div>
-  <!-- /.row -->
 {% endblock %}
 
 {% macro list_group_item(left_text, right_text) %}
-  <p class="list-group-item">
-    {{ left_text }}
-    <span class="pull-right text-muted">
+    <p class="list-group-item">
+        {{ left_text }}
+        <span class="pull-right text-muted">
       {% if right_text is not empty %}
-        {{ right_text }}
+          {{ right_text }}
       {% else %}
-        {{ 'profile.show.empty'|trans }}
+          {{ 'profile.show.empty'|trans }}
       {% endif %}
     </span>
-  </p>
+    </p>
 {% endmacro %}

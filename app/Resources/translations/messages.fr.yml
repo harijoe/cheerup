@@ -94,11 +94,13 @@ profile:
             add: Ajouter un poste
             fields:
                 title: Intitulé
-                start_date: Début
-                end_date: Fin
+                date_range: Dates
+                actions: Actions
     show:
         title: Profile de %fullname%
         empty: Non renseigné
+        picture:
+            title: Photo de profil
         edit:
             link: Aller à la page d'édition du profil
             title: Edition du profil
@@ -119,6 +121,13 @@ profile:
                 personal_website: Site personnel
                 phone_number: Numéro de téléphone fixe
                 cellphone_number: Numéro de téléphone portable
+        cheerup_positions:
+            title: Postes Cheerup
+            empty: Aucun poste renseigné pour le moment
+            add: Ajouter un poste
+            fields:
+                title: Intitulé
+                date_range: Dates
 
 group:
     header:

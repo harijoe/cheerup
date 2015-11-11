@@ -25,7 +25,6 @@ $(document).ready(function () {
     }
 
     function updateEmptyTable() {
-        console.log($collectionHolder.children().length);
         if (1 === $collectionHolder.children().length) {
             $emptyMessage.show();
         } else {

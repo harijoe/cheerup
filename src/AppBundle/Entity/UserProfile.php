@@ -403,6 +403,7 @@ class UserProfile
     {
         if (!$this->getCheerupPositions()->contains($cheerupPosition)) {
             $this->getCheerupPositions()->add($cheerupPosition);
+            $cheerupPosition->setUserProfile($this);
         }
 
         return $this;

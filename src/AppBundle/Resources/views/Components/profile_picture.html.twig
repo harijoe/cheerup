@@ -1,0 +1,10 @@
+{% if webPath is not null %}
+  {% set picture_url = user.userProfile.picture.webPath %}
+{% else %}
+  {% set picture_url = asset('images/default_profile_picture.jpg') %}
+{% endif %}
+<img src="{{ picture_url|imagine_filter('profile_thumbnail') }}"
+     alt="Profile picture thumbnail"
+     class="img-circle"
+     style="padding: 15px"
+/>
