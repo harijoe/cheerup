@@ -96,8 +96,27 @@ profile:
                 title: Intitulé
                 start_date: Début
                 end_date: Fin
-    view:
-        title: Profil de %fullname%
+    show:
+        title: Profile de %fullname%
+        empty: Non renseigné
+        edit_link: Editer le profil
+        user_profile:
+            title: Informations générales
+            coordinates: Coordonnées
+            social_networks: Réseaux sociaux
+            submit: Sauvegarder
+            fields:
+                first_year_contact: Première année de contact avec CheerUp!
+                address: Adresse ligne 1
+                additional_address_details: Adresse ligne 2
+                zip_code: Code postal
+                city: Ville
+                facebook_profile: Adresse du profil Facebook
+                twitter_profile: Adresse du profil Twitter
+                linked_in_profile: Adresse du profil LinkedIn
+                personal_website: Site personnel
+                phone_number: Numéro de téléphone fixe
+                cellphone_number: Numéro de téléphone portable
 
 group:
     header:

@@ -22,53 +22,21 @@ use AppBundle\Form\Type\UserProfileFormType;
 class ProfileController extends Controller
 {
     /**
-     * @param Request $request
-     * @Config\Route("/danger-zone", name="cheerup_profile_danger_zone")
-     * @Config\Template()
-     * @Config\Security("has_role('ROLE_USER')")
+     * @Config\Route("/", name="cheerup_profile_index")
      *
-     * @return array
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function dangerZoneAction() {
-        $user = $this->getUser();
-        $formChangePassword = $this->container->get('fos_user.change_password.form');
-        $formChangePasswordHandler = $this->container->get('fos_user.change_password.form.handler');
-
-        $processChangePassword = $formChangePasswordHandler->process($user);
-
-        if ($processChangePassword) {
-            $this->addFlash(
-                'success',
-                $this->get('translator')->trans('profile.edit.change_password.success')
-            );
-        }
-
-        return [
-            'form_change_password'     => $formChangePassword->createView(),
-            'user'                     => $user,
-        ];
-    }
-
-    /**
-     * @param User $user
-     *
-     * @Config\Route("/{id}", name="cheerup_profile_view")
-     * @Config\Template()
-     *
-     * @return array
-     */
-    public function indexAction(User $user)
+    public function indexAction()
     {
-        return [
-            'fullname' => $user->getFullName()
-        ];
+        $user = $this->getUser();
+
+        return $this->redirectToRoute('cheerup_profile_show', ['id' => $user->getId()]);
     }
 
     /**
      * @param Request $request
-     * @Config\Route("/", name="cheerup_profile_edit")
+     * @Config\Route("/edit", name="cheerup_profile_edit")
      * @Config\Template()
-     * @Config\Security("has_role('ROLE_USER')")
      *
      * @return array
      */
@@ -80,8 +48,8 @@ class ProfileController extends Controller
         $currentPictureWebPath = $userProfile->getPicture()->getWebPath();
         $picture               = new Picture();
 
-        $formUserProfile = $this->createForm(new UserProfileFormType(), $userProfile);
-        $formPicture     = $this->createForm(new PictureFormType(), $picture, ['validation_groups' => 'profile']);
+        $formUserProfile      = $this->createForm(new UserProfileFormType(), $userProfile);
+        $formPicture          = $this->createForm(new PictureFormType(), $picture, ['validation_groups' => 'profile']);
         $formCheerupPositions = $this->createForm(new CheerupPositionCollectionFormType(), $userProfile);
 
 
@@ -131,6 +99,53 @@ class ProfileController extends Controller
             'form_picture'             => $formPicture->createView(),
             'form_cheerup_positions'   => $formCheerupPositions->createView(),
             'user'                     => $user,
+        ];
+    }
+
+    /**
+     * @Config\Route("/danger-zone", name="cheerup_profile_danger_zone")
+     * @Config\Template()
+     * @Config\Security("has_role('ROLE_USER')")
+     *
+     * @return array
+     */
+    public function dangerZoneAction() {
+        $user = $this->getUser();
+        $formChangePassword = $this->container->get('fos_user.change_password.form');
+        $formChangePasswordHandler = $this->container->get('fos_user.change_password.form.handler');
+
+        $processChangePassword = $formChangePasswordHandler->process($user);
+
+        if ($processChangePassword) {
+            $this->addFlash(
+                'success',
+                $this->get('translator')->trans('profile.edit.change_password.success')
+            );
+        }
+
+        return [
+            'form_change_password'     => $formChangePassword->createView(),
+            'user'                     => $user,
+        ];
+    }
+
+    /**
+     * @param User $user
+     *
+     * @Config\Route("/{id}", name="cheerup_profile_show")
+     * @Config\Template()
+     *
+     * @return array
+     */
+    public function showAction(User $user)
+    {
+        $currentUser = $this->getUser();
+        $allowedToEdit = $currentUser->getId() === $user->getId();
+        $userProfile = $user->getUserProfile();
+
+        return [
+            'allowed_to_edit' => $allowedToEdit,
+            'user'   => $user,
         ];
     }
 }
