@@ -156,11 +156,6 @@
                         {% filter escape %}
                             {{ include('AppBundle:Profile:Prototype/cheerup_position.html.twig', { 'form': form_cheerup_positions.cheerupPositions.vars.prototype }) }}
                         {% endfilter %}">
-                        {% if form_cheerup_positions.cheerupPositions is not empty %}
-                            {% for position in form_cheerup_positions.cheerupPositions %}
-                                {{ include('AppBundle:Profile:Prototype/cheerup_position.html.twig', { 'form': position }) }}
-                            {% endfor %}
-                        {% endif %}
                         <tr class="cheerup-position-empty-table-message" style="display: none;">
                             <td colspan="3">
                                 <div class="alert alert-warning">
@@ -168,6 +163,11 @@
                                 </div>
                             </td>
                         </tr>
+                        {% if form_cheerup_positions.cheerupPositions is not empty %}
+                            {% for position in form_cheerup_positions.cheerupPositions %}
+                                {{ include('AppBundle:Profile:Prototype/cheerup_position.html.twig', { 'form': position }) }}
+                            {% endfor %}
+                        {% endif %}
                         </tbody>
                     </table>
                     <button class="btn btn-success btn-block">{{ 'profile.edit.cheerup_positions.submit'|trans }}</button>
