@@ -47,9 +47,9 @@ class ProfileController extends Controller
         $userProfile           = $user->getUserProfile();
         $picture               = new Picture();
 
-        $formUserProfile      = $this->createForm(new UserProfileFormType(), $userProfile);
-        $formPicture          = $this->createForm(new PictureFormType(), $picture, ['validation_groups' => 'profile']);
-        $formCheerupPositions = $this->createForm(new CheerupPositionCollectionFormType(), $userProfile);
+        $formUserProfile      = $this->createForm(UserProfileFormType::class, $userProfile);
+        $formPicture          = $this->createForm(PictureFormType::class, $picture, ['validation_groups' => 'profile']);
+        $formCheerupPositions = $this->createForm(CheerupPositionCollectionFormType::class, $userProfile);
 
 
         $formUserProfile->handleRequest($request);

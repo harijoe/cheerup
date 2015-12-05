@@ -12,7 +12,7 @@ Vagrant.configure("2") do |config|
 
     # Configure shared folders
     config.vm.synced_folder ".",  "/devops", id: "vagrant-root", :nfs => true
-    config.vm.synced_folder "..", "/var/www/cheerup", id: "application",  :nfs => true
+    config.vm.synced_folder "..", "/var/www/cheerup/current", id: "application",  :nfs => true
 
     # Configure VirtualBox environment
     config.vm.provider :virtualbox do |v|

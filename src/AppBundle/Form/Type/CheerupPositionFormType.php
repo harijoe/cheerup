@@ -3,6 +3,7 @@
 namespace AppBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -18,8 +19,8 @@ class CheerupPositionFormType extends AbstractType
             'attr'   => ['class' => 'form-control range_input']
         ];
 
-        $builder->add('startDate', 'date', $dateOptions)
-            ->add('endDate', 'date', $dateOptions)
+        $builder->add('startDate', DateType::class, $dateOptions)
+            ->add('endDate', DateType::class, $dateOptions)
             ->add('title', null, [
                     'label' => false,
             ]);

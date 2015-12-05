@@ -2,7 +2,7 @@
 - hosts: all
   sudo:  true
   vars:
-    doc_root: /var/www/cheerup/web
+    doc_root: /var/www/cheerup/current/web
     app_name: cheerup
     update_apt: true
     app_env: dev
@@ -16,6 +16,8 @@
       - { name: mcrypt, package: php5-mcrypt }
       - { name: mysql, package: php5-mysql }
       - { name: redis, package: php5-redis }
+      - { name: intl, package: php5-intl }
+      - { name: gd, package: php5-gd }
     php_extensions:
       - { name: "jsmin", package: "pecl.php.net/jsmin-beta" }
       - { name: "xhprof", package: "pecl.php.net/xhprof-beta" }
