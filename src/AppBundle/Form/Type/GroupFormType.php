@@ -4,9 +4,11 @@ namespace AppBundle\Form\Type;
 
 use AppBundle\Entity\Aggregate;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use UserBundle\Entity\User;
 
 class GroupFormType extends AbstractType
 {
@@ -23,12 +25,13 @@ class GroupFormType extends AbstractType
             ->add('description', null, [
                 'label' => 'admin.index.group.create.field.description'
             ])
-            ->add('offshoot', 'choice', [
+            ->add('offshoot', ChoiceType::class, [
                 'label' => 'admin.index.group.create.field.offshoot',
-                'choices' => [
-                    true => 'admin.index.group.create.field.is_offshoot',
-                    false => 'admin.index.group.create.field.is_not_offshoot',
-                ],
+//                'choices' => [
+//                    true => 'admin.index.group.create.field.is_offshoot',
+//                    false => 'admin.index.group.create.field.is_not_offshoot',
+//                ],
+                'choices' => User::getProfileTypesChoices(),
             ]);
     }
 

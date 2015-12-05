@@ -114,11 +114,6 @@ class UserProfile
      */
     private $cheerupPositions;
 
-    public function __construct()
-    {
-        $this->picture = new Picture();
-    }
-
     /**
      * Get id
      *

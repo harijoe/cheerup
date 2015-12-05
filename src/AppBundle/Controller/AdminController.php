@@ -29,11 +29,11 @@ class AdminController extends Controller
     public function indexAction(Request $request)
     {
         $group                        = new Group();
-        $formGroup                    = $this->createForm(new GroupFormType(), $group);
+        $formGroup                    = $this->createForm(GroupFormType::class, $group);
         $userRepository               = $this->get('doctrine')->getRepository('UserBundle:User');
         $notValidatedUsers            = $userRepository->findBy(['validated' => false]);
         $formUserValidationCollection =
-            $this->createForm(new UserValidationCollectionFormType(), ['users' => $notValidatedUsers]);
+            $this->createForm(UserValidationCollectionFormType::class, ['users' => $notValidatedUsers]);
 
         $formGroup->handleRequest($request);
         $formUserValidationCollection->handleRequest($request);
@@ -86,7 +86,7 @@ class AdminController extends Controller
 
             // Hide validated users
             $formUserValidationCollection =
-                $this->createForm(new UserValidationCollectionFormType(), ['users' => $notValidatedUsers]);
+                $this->createForm(UserValidationCollectionFormType::class, ['users' => $notValidatedUsers]);
         }
 
         return [

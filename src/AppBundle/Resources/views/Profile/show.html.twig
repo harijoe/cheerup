@@ -57,7 +57,7 @@
                     {{ 'profile.show.picture.title'|trans }}
                 </div>
                 <div class="panel-body text-center">
-                    {% include 'AppBundle:Components:profile_picture.html.twig' with {'webPath' : user.userProfile.picture.webPath} %}
+                    {% include 'AppBundle:Components:profile_picture.html.twig' with {'picture' : user.userProfile.picture} %}
                 </div>
             </div>
         </div>

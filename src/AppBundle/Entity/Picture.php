@@ -21,7 +21,7 @@ class Picture
     private $id;
 
     /**
-     * @ORM\Column(name="path", type="string", length=255)
+     * @ORM\Column(name="extension", type="string", length=255)
      */
     private $extension;
 
