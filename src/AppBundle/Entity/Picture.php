@@ -21,9 +21,9 @@ class Picture
     private $id;
 
     /**
-     * @ORM\Column(name="path", type="string", length=255, nullable=true)
+     * @ORM\Column(name="path", type="string", length=255)
      */
-    private $path;
+    private $extension;
 
     /**
      * @var string
@@ -60,23 +60,7 @@ class Picture
     public function setFile(UploadedFile $file = null)
     {
         $this->file = $file;
-        if (is_file($this->getAbsolutePath())) {
-            $this->temp = $this->getAbsolutePath();
-            $this->path = null;
-        } else {
-            $this->path = 'initial';
-        }
-    }
-
-    /**
-     * @ORM\PrePersist()
-     * @ORM\PreUpdate()
-     */
-    public function preUpload()
-    {
-        if (null !== $this->getFile()) {
-            $this->path = $this->getFile()->guessExtension();
-        }
+        $this->extension = $file ? $file->guessExtension() : null;
     }
 
     /**
@@ -89,17 +73,10 @@ class Picture
             return;
         }
 
-        if (isset($this->temp)) {
-            unlink($this->temp);
-            $this->temp = null;
-        }
-
         $this->getFile()->move(
             $this->getUploadRootDir(),
             $this->id.'.'.$this->getFile()->guessExtension()
         );
-
-        $this->setFile(null);
     }
 
     /**
@@ -122,16 +99,16 @@ class Picture
 
     public function getAbsolutePath()
     {
-        return null === $this->path
+        return null === $this->extension
             ? null
-            : $this->getUploadRootDir().'/'.$this->id.'.'.$this->path;
+            : $this->getUploadRootDir().'/'.$this->id.'.'.$this->extension;
     }
 
     public function getWebPath()
     {
-        return null === $this->path
+        return null === $this->extension
             ? null
-            : $this->getUploadDir().'/'.$this->id.'.'.$this->path;
+            : $this->getUploadDir().'/'.$this->id.'.'.$this->extension;
     }
 
     protected function getUploadRootDir()

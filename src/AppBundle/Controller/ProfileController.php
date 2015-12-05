@@ -73,7 +73,7 @@ class ProfileController extends Controller
 
             $userProfile->setPicture($picture);
 
-            $em->persist($picture);
+            $em->persist($userProfile);
             $em->flush();
 
             $this->addFlash(
@@ -92,8 +92,6 @@ class ProfileController extends Controller
                 $this->get('translator')->trans('profile.edit.cheerup_positions.success')
             );
         }
-
-        $userProfile->getCheerupPositions();
 
         return [
             'form_user_profile'        => $formUserProfile->createView(),
