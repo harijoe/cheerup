@@ -12,3 +12,9 @@ cd ..
 composer install
 ```
 You're done, enjoy : http://192.168.33.10
+
+
+TODO :
+  - Hide errors in login form
+  - Replace datepicker displays
+  - Fix profile picture upload

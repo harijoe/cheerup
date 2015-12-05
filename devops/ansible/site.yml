@@ -34,3 +34,4 @@
     - git
     - curl
     - redis
+    - yaegashi.blockinfile

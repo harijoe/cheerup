@@ -25,3 +25,15 @@
   command: /usr/sbin/php5enmod {{ item.name }} creates=/etc/php5/cli/conf.d/20-{{ item.name }}.ini
   with_items: php_extensions
   notify: restart php5-fpm
+
+- name: Update php.ini for xdebug
+  blockinfile:
+    dest: /etc/php5/fpm/php.ini
+    block: |
+      [xdebug]
+      zend_extension="/usr/local/php/modules/xdebug.so"
+      xdebug.idekey=PHPSTORM
+      xdebug.remote_enable=1
+      xdebug.remote_port=9000
+      xdebug.remote_connect_back=1
+  notify: restart php5-fpm
