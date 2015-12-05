@@ -1,0 +1,12 @@
+---
+- name: Install npm
+  sudo: yes
+  apt:  pkg=npm state=latest
+
+- name: Install bower
+  sudo: yes
+  command: npm install -g bower
+
+- name: Install gulp
+  sudo: yes
+  command: npm install -g bower

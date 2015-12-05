@@ -1,0 +1,27 @@
+---
+  - name: Install nginx
+    sudo: yes
+    apt:  pkg=nginx state=latest
+
+  - name: Ensure nginx log directory exists
+    file: dest=/var/log/nginx/{{ app_name }} state=directory
+
+  - name: Add app configuration
+    sudo: yes
+    template: src={{ item }} dest=/etc/nginx/sites-available/{{ app_name }}
+    with_first_found:
+      - files:
+         - conf.{{ app_env }}.tpl
+         - conf.prod.tpl
+
+  - name: Remove nginx default site
+    file: >
+      path=/etc/nginx/sites-enabled/default
+      state=absent
+
+  - name: Enable app configuration
+    file: >
+      src=/etc/nginx/sites-available/{{ app_name }}
+      dest=/etc/nginx/sites-enabled/{{ app_name }}
+      state=link
+    notify: restart nginx
