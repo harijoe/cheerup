@@ -2,10 +2,12 @@
 
 namespace UserBundle\Form\Type;
 
-use AppBundle\Entity\Aggregate;
 use Doctrine\ORM\EntityRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use UserBundle\Entity\User;
 
 class RegistrationFormType extends AbstractType
@@ -16,13 +18,13 @@ class RegistrationFormType extends AbstractType
             ->remove('username')
             ->add(
                 'profileType',
-                'choice', [
+                ChoiceType::class, [
                     'label'   => 'register.field.profile_type',
-                    'choices' => User::getProfileTypesChoices()
+                    'choices' => User::getProfileTypesChoices(),
                 ])
             ->add(
                 'offshootOfOrigin',
-                'entity', [
+                EntityType::class, [
                     'class'         => 'AppBundle\Entity\Group',
                     'query_builder' => function (EntityRepository $er) {
                         return $er->createQueryBuilder('a')
@@ -44,12 +46,18 @@ class RegistrationFormType extends AbstractType
             ;
     }
 
-    public function getParent()
+    public function configureOptions(OptionsResolver $resolver)
     {
-        return 'fos_user_registration';
+        $resolver->setDefaults(array(
+            'data_class' => 'UserBundle\Entity\User',
+        ));
     }
 
-    public function getName()
+    public function getParent() {
+        return 'FOS\UserBundle\Form\Type\RegistrationFormType';
+    }
+
+    public function getBlockPrefix()
     {
         return 'app_user_registration';
     }

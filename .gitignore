@@ -18,3 +18,5 @@ npm-debug.log
 /web/fonts/
 /web/images/
 /web/media/
+/bower_components/
+/node_modules/

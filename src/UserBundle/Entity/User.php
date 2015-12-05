@@ -4,7 +4,7 @@ namespace UserBundle\Entity;
 use AppBundle\Entity\Group;
 use AppBundle\Entity\UserProfile;
 use Doctrine\Common\Collections\Collection;
-use FOS\UserBundle\Entity\User as BaseUser;
+use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\GroupInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -180,7 +180,7 @@ class User extends BaseUser
      */
     public static function getProfileTypesChoices()
     {
-        return self::$profileTypes;
+        return array_flip(self::$profileTypes);
     }
 
     /**

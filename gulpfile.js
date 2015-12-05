@@ -109,5 +109,6 @@ gulp.task('watch', function () {
 });
 
 //define executable tasks when running "gulp" command
-gulp.task('default', ['js', 'css', 'fonts', 'img', 'watch']);
+gulp.task('default', ['js', 'css', 'fonts', 'img']);
+gulp.task('watch', ['js', 'css', 'fonts', 'img', 'watch']);
 gulp.task('build', ['js', 'css', 'fonts', 'img']);

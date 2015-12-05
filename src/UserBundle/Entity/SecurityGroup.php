@@ -16,14 +16,4 @@ class SecurityGroup extends BaseGroup
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-
-    /**
-     * @ORM\Column(name="name", type="string")
-     */
-    protected $name;
-
-    /**
-     * @ORM\Column(name="roles", type="array")
-     */
-    protected $roles;
 }
