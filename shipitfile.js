@@ -15,18 +15,12 @@ module.exports = function (shipit) {
                     'vendor',
                     'bower_components',
                     'node_modules',
-                    'app/cache',
-                    'app/logs'
+                    'var'
                 ],
                 files: [
                     'app/config/parameters.yml'
                 ]
             }
-        },
-        staging: {
-            servers: 'ubuntu@52.29.16.189',
-            branch: 'staging',
-            deployTo: '/var/www/cheerup-staging'
         },
         prod: {
             servers: 'ubuntu@52.29.16.189',
@@ -40,11 +34,11 @@ module.exports = function (shipit) {
     };
 
     var clearCache = function () {
-        return shipit.remote("cd " + shipit.releasePath + " && php app/console cache:clear --env=prod");
+        return shipit.remote("cd " + shipit.releasePath + " && php bin/console cache:clear --env=prod");
     };
 
     var migrate = function () {
-        return shipit.remote("cd " + shipit.releasePath + " && php app/console doctrine:migrations:migrate");
+        return shipit.remote("cd " + shipit.releasePath + " && php bin/console doctrine:schema:update");
     };
 
     var npmInstall = function () {

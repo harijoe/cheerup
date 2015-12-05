@@ -5,7 +5,8 @@
     doc_root: /var/www/cheerup/current/web
     app_name: cheerup
     update_apt: true
-    app_env: dev
+    app_env: prod
+    prod_server_name: cheerup.vallini.io
     sys_packages:
       - mcrypt
     php_packages:

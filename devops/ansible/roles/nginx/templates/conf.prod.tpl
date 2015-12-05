@@ -1,6 +1,6 @@
 server {
 
-    server_name symfony;
+    server_name {{ prod_server_name }};
     root        {{ doc_root }};
 
     error_log   /var/log/nginx/{{ app_name }}/error.log;
