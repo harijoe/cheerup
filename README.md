@@ -1,4 +1,14 @@
 cheerup
-=======
+========
+[![Build Status](https://travis-ci.org/harijoe/cheerup.svg)](https://github.com/harijoe/cheerup)
 
-A Symfony project created on December 5, 2015, 1:05 pm.
+## Installation
+
+```
+git clone git@github.com:harijoe/symfony-vagrant-up.git
+cd cheerup/vagrant
+vagrant up
+cd ..
+composer install
+```
+You're done, enjoy : http://192.168.33.10
