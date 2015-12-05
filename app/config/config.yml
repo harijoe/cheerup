@@ -67,3 +67,33 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+# FOSUserBundle Configuration
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: UserBundle\Entity\User
+    registration:
+        form:
+            type: app_user_registration
+            validation_groups: [Default, CheerupRegistration]
+        confirmation:
+            enabled: true
+    from_email:
+        address:        "%fosub_sender_address%"
+        sender_name:    "%fosub_sender_name%"
+    group:
+        group_class: UserBundle\Entity\SecurityGroup
+
+# LiipImagineBundle Configuration
+liip_imagine:
+    resolvers:
+       default:
+          web_path: ~
+
+    filter_sets:
+        cache: ~
+        profile_thumbnail:
+            quality: 75
+            filters:
+                thumbnail: { size: [200, 200], mode: outbound }
