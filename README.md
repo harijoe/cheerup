@@ -18,3 +18,6 @@ TODO :
   - Hide errors in login form
   - Replace datepicker displays
   - Fix profile picture upload
+  - Add test for reset password
+  - Rebuild automated deployment
+  - Change the repo

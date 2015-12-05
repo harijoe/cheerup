@@ -28,7 +28,7 @@
                 <div class="panel-body">
                     {{ form_start(form_change_password) }}
                     {{ form_row(form_change_password.current_password) }}
-                    {{ form_row(form_change_password.new) }}
+                    {{ form_row(form_change_password.plainPassword) }}
                     <input class="btn btn-lg btn-default btn-default btn-block" type="submit"
                            value="{{ 'profile.edit.change_password.submit'|trans }}"/>
                     {{ form_end(form_change_password) }}

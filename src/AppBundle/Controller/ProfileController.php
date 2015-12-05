@@ -7,6 +7,7 @@ use AppBundle\Entity\UserProfile;
 use AppBundle\Form\Type\CheerupPositionCollectionFormType;
 use AppBundle\Form\Type\CheerupPositionFormType;
 use AppBundle\Form\Type\PictureFormType;
+use FOS\UserBundle\Form\Type\ChangePasswordFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Config;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -103,20 +104,23 @@ class ProfileController extends Controller
     }
 
     /**
+     * @param Request $request
      * @Config\Route("/danger-zone", name="cheerup_profile_danger_zone")
      * @Config\Template()
      * @Config\Security("has_role('ROLE_USER')")
      *
      * @return array
      */
-    public function dangerZoneAction() {
+    public function dangerZoneAction(Request $request) {
         $user = $this->getUser();
-        $formChangePassword = $this->container->get('fos_user.change_password.form');
-        $formChangePasswordHandler = $this->container->get('fos_user.change_password.form.handler');
+        $formChangePassword = $this->createForm(ChangePasswordFormType::class, $user);
+        $formChangePassword->handleRequest($request);
 
-        $processChangePassword = $formChangePasswordHandler->process($user);
+        if ($formChangePassword->isValid()) {
+            /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
+            $userManager = $this->get('fos_user.user_manager');
+            $userManager->updateUser($user);
 
-        if ($processChangePassword) {
             $this->addFlash(
                 'success',
                 $this->get('translator')->trans('profile.edit.change_password.success')
