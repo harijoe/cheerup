@@ -86,6 +86,7 @@ profile:
             keys:
                 profile_type: "Type de profil :"
                 is_validated: "Profil validé :"
+                offshoot_of_origin: "Antenne d'origine :"
         cheerup_positions:
             title: "Postes Cheerup"
             success: "Vos postes Cheerup ont été modifiés avec succès"
