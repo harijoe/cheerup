@@ -6,14 +6,11 @@ script: phpunit
 
 before_script:
   - cp app/config/parameters.yml.travis app/config/parameters.yml
+  - mysql -e 'create database symfony;'
   - composer install
-  - php bin/console doctrine:database:create
   - php bin/console doctrine:schema:update --force
   - php bin/console doctrine:fixtures:load -n
   - npm install
-
-git:
-    submodules: false
 
 cache:
     directories:
@@ -21,3 +18,6 @@ cache:
       - bower_components
       - vendor
       - bin
+
+services:
+  - mysql
