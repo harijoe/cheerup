@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Tests\Controller;
+namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -30,8 +30,8 @@ class SecurityControllerTest extends WebTestCase
     {
         $client = $this->getLoggedInClient('user1@mail.com', 'user1');
         $baseUrl = $client->getKernel()->getContainer()->getParameter('hostname');
-
-        $this->assertEquals(true, $client->getResponse()->isRedirect('http://'.$baseUrl.'/'));
+        
+        $this->assertEquals(true, $client->getResponse()->isRedirect('http://'.$baseUrl.'/profile'));
     }
 
     public static function getLoggedInClient($username, $password)

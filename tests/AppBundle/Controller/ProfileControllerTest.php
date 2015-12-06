@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Tests\Controller;
+namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -13,6 +13,7 @@ class ProfileControllerTest extends WebTestCase
         $baseUrl = $client->getKernel()->getContainer()->getParameter('hostname');
 
         $this->assertEquals(true, $client->getResponse()->isRedirect('http://'.$baseUrl.'/profile/'));
+        $client->followRedirect();
         $client->followRedirect();
 
         $this->assertEquals(true, $client->getResponse()->isSuccessful());

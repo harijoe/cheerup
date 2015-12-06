@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Tests\Controller;
+namespace AppBundle\Controller;
 
 use FOS\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Model\UserManager;
