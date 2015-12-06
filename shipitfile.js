@@ -38,7 +38,7 @@ module.exports = function (shipit) {
     };
 
     var migrate = function () {
-        return shipit.remote("cd " + shipit.releasePath + " && php bin/console doctrine:schema:update");
+        return shipit.remote("cd " + shipit.releasePath + " && php bin/console doctrine:schema:update --force");
     };
 
     var npmInstall = function () {
