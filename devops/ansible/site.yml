@@ -6,7 +6,7 @@
     app_name: cheerup
     update_apt: true
     app_env: prod
-    prod_server_name: cheerup.vallini.io
+    prod_server_name: cheerup.julienvallini.io
     sys_packages:
       - mcrypt
     php_packages:

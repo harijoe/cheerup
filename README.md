@@ -11,13 +11,15 @@ vagrant up
 cd ..
 composer install
 ```
-You're done, enjoy : http://192.168.33.10
 
+
+To provision (configure to prod first):
+`ansible-playbook -i inventory site.yml`
+
+To deploy :
+`shipit prod deploy`
 
 TODO :
-  - Hide errors in login form
   - Replace datepicker displays
-  - Fix profile picture upload
   - Add test for reset password
-  - Rebuild automated deployment
-  - Change the repo
+  - Fix provisioning for prod (need ubuntu users as default nginx/php-fpm user)
