@@ -131,12 +131,6 @@ profile:
                 title: "Intitulé"
                 date_range: "Dates"
 
-group:
-    header:
-        helper:
-            OFFSHOOT: "Antenne"
-            GROUP: "Groupe"
-
 admin:
     index:
         title: "Administration"

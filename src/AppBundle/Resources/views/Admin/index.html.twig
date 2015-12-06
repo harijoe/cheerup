@@ -44,7 +44,7 @@
                                             <td>{{ user.vars.value.lastname }}</td>
                                             <td>{{ ('user.profile_type.'~user.vars.value.profileType|lower)|trans }}</td>
                                             <td>{% if user.vars.value.offshootOfOrigin is not null %}
-                                                    {{ user.vars.value.offshootOfOrigin.name }}
+                                                    <a href="{{ path('cheerup_group_show', {'id': user.vars.value.offshootOfOrigin.id}) }}">{{ user.vars.value.offshootOfOrigin.name }}</a>
                                                 {% endif %}
                                             </td>
                                             <td class="big-checkbox text-center">{{ form_widget(user.validated) }}</td>
