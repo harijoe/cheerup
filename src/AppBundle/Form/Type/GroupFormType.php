@@ -27,11 +27,10 @@ class GroupFormType extends AbstractType
             ])
             ->add('offshoot', ChoiceType::class, [
                 'label' => 'admin.index.group.create.field.offshoot',
-//                'choices' => [
-//                    true => 'admin.index.group.create.field.is_offshoot',
-//                    false => 'admin.index.group.create.field.is_not_offshoot',
-//                ],
-                'choices' => User::getProfileTypesChoices(),
+                'choices' => array_flip([
+                    true => 'admin.index.group.create.field.is_offshoot',
+                    false => 'admin.index.group.create.field.is_not_offshoot',
+                ]),
             ]);
     }
 
