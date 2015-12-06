@@ -1,5 +1,7 @@
 {% extends 'AppBundle::layout.html.twig' %}
 
+{% import _self as this %}
+
 {% block content %}
     <div class="row">
         <div class="col-lg-12">
@@ -19,17 +21,17 @@
                 </div>
                 <div class="panel-body">
                     <div class="list-group">
-                        {{ list_group_item('profile.show.user_profile.fields.first_year_contact'|trans, user.userProfile.firstYearContact) }}
-                        {{ list_group_item('profile.show.user_profile.fields.address'|trans, user.userProfile.address) }}
-                        {{ list_group_item('profile.show.user_profile.fields.additional_address_details'|trans, user.userProfile.additionalAddressDetails) }}
-                        {{ list_group_item('profile.show.user_profile.fields.zip_code'|trans, user.userProfile.zipCode) }}
-                        {{ list_group_item('profile.show.user_profile.fields.city'|trans, user.userProfile.city) }}
-                        {{ list_group_item('profile.show.user_profile.fields.facebook_profile'|trans, user.userProfile.facebookProfile) }}
-                        {{ list_group_item('profile.show.user_profile.fields.twitter_profile'|trans, user.userProfile.twitterProfile) }}
-                        {{ list_group_item('profile.show.user_profile.fields.linked_in_profile'|trans, user.userProfile.linkedInProfile) }}
-                        {{ list_group_item('profile.show.user_profile.fields.personal_website'|trans, user.userProfile.personalWebsite) }}
-                        {{ list_group_item('profile.show.user_profile.fields.phone_number'|trans, user.userProfile.phoneNumber) }}
-                        {{ list_group_item('profile.show.user_profile.fields.cellphone_number'|trans, user.userProfile.cellphoneNumber) }}
+                        {{ this.list_group_item('profile.show.user_profile.fields.first_year_contact'|trans, user.userProfile.firstYearContact) }}
+                        {{ this.list_group_item('profile.show.user_profile.fields.address'|trans, user.userProfile.address) }}
+                        {{ this.list_group_item('profile.show.user_profile.fields.additional_address_details'|trans, user.userProfile.additionalAddressDetails) }}
+                        {{ this.list_group_item('profile.show.user_profile.fields.zip_code'|trans, user.userProfile.zipCode) }}
+                        {{ this.list_group_item('profile.show.user_profile.fields.city'|trans, user.userProfile.city) }}
+                        {{ this.list_group_item('profile.show.user_profile.fields.facebook_profile'|trans, user.userProfile.facebookProfile) }}
+                        {{ this.list_group_item('profile.show.user_profile.fields.twitter_profile'|trans, user.userProfile.twitterProfile) }}
+                        {{ this.list_group_item('profile.show.user_profile.fields.linked_in_profile'|trans, user.userProfile.linkedInProfile) }}
+                        {{ this.list_group_item('profile.show.user_profile.fields.personal_website'|trans, user.userProfile.personalWebsite) }}
+                        {{ this.list_group_item('profile.show.user_profile.fields.phone_number'|trans, user.userProfile.phoneNumber) }}
+                        {{ this.list_group_item('profile.show.user_profile.fields.cellphone_number'|trans, user.userProfile.cellphoneNumber) }}
                     </div>
                 </div>
             </div>
